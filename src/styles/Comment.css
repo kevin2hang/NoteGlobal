@@ -1,0 +1,36 @@
+.comment-block {
+  width: 100%;
+  height: fit-content;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.time-display {
+  align-self: flex-end;
+}
+
+.parent-comment {
+  width: 100%
+}
+
+.reply-comment {
+  margin-left: 15%;
+  width: 85%;
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+}
+
+.flag {
+  background-color: gray;
+  width: 20px;
+  height: 50px;
+}
+
+.flag:hover {
+  background-color: red;
+}

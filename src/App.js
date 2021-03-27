@@ -7,10 +7,11 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 
 import database from './database'
+import SignOut from './components/SignOut';
 
-class App extends Component() {
-  constructor(props) {
-    super(props);
+class App extends Component {
+  constructor() {
+    super();
 
     this.state = {
       signedIn: false,
@@ -21,7 +22,7 @@ class App extends Component() {
         googleId: null
       }
     }
-    uiConfig = {
+    this.uiConfig = {
       signInFlow: "popup",
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
@@ -43,7 +44,7 @@ class App extends Component() {
           user: {
             displayName: currUser.displayName,
             email: currUser.email,
-            photoUrl: currUser.photoUrl,
+            photoUrl: currUser.photoURL,
             googleId: currUser.providerData[0].uid
           }
         });
@@ -62,12 +63,12 @@ class App extends Component() {
         });
       }
 
-      this.setUserInLocalStorage(user);
+      this.setUserInLocalStorage(this.state.user);
     })
   }
 
   setUserInLocalStorage = (user) => {
-    let localStorage  = window.localStorage;
+    let localStorage = window.localStorage;
     localStorage.addItem("displayName", user.displayName);
     localStorage.addItem("email", user.email);
     localStorage.addItem("photoUrl", user.photoUrl);
@@ -86,8 +87,14 @@ class App extends Component() {
               <div id="welcome">Welcome to Note Global</div>
               <div id="signInPrompt">Please sign in to continue!</div>
               <StyledFirebaseAuth
-                uiconfig={this.uiConfig}
+                uiConfig={this.uiConfig}
                 firebaseAuth={firebase.auth()} />
+            </div>
+          }
+          {this.state.signedIn &&
+            <div>
+              <div>Signed In!</div>
+              <SignOut />
             </div>
           }
         </body>

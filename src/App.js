@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+
+// imports for styling
 import './App.css';
 
+// imports for libraries
 import firebase from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-
-
+// components from component folder
 import database from './database'
 import SignOut from './components/SignOut';
+import NavBar from './components/NavBar'
 
 class App extends Component {
   constructor() {
@@ -82,6 +86,7 @@ class App extends Component {
         <header className="App-header">
         </header>
         <body>
+          <Router>
           {!this.state.signedIn &&
             <div>
               <div id="welcome">Welcome to Note Global</div>
@@ -93,10 +98,18 @@ class App extends Component {
           }
           {this.state.signedIn &&
             <div>
+              <NavBar/>
+              {/* <Route path="/" component={}/>
+              <Route path="/:school/:course" component={}/>
+              <Route path="/:school/:course/:folder" component={}/>
+              <Route path="/user/admin" component={}/>
+              <Route path="/user/notes" component={}/>
+              <Route path="/profile" component={Profile}/> */}
               <div>Signed In!</div>
               <SignOut />
             </div>
           }
+          </Router>
         </body>
       </div>
     );

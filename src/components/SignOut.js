@@ -5,7 +5,7 @@ import firebase from 'firebase'
 class SignOut extends Component {
 
     signOut = () => {
-        let localStorage = window.localStorage;
+        const localStorage = window.localStorage;
         localStorage.setItem("displayName", null);
         localStorage.setItem("email", null);
         localStorage.setItem("photoUrl", null);

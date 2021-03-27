@@ -16,7 +16,7 @@ export const getDisplayName = () => {
 }
 
 export const getSignedInUser = () => {
-    let localStorage = window.localStorage;
+    const localStorage = window.localStorage;
     let signedInUser = {
         displayName : localStorage.getItem("displayName"),
         email: localStorage.getItem("email"),

@@ -72,7 +72,7 @@ class App extends Component {
   }
 
   setUserInLocalStorage = (user) => {
-    let localStorage = window.localStorage;
+    const localStorage = window.localStorage;
     localStorage.addItem("displayName", user.displayName);
     localStorage.addItem("email", user.email);
     localStorage.addItem("photoUrl", user.photoUrl);

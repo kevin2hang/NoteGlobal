@@ -52,6 +52,16 @@ class App extends Component {
             googleId: currUser.providerData[0].uid
           }
         });
+
+        if (this.isNewUser(currUser)) {
+          database.ref('users/'+this.state.user.googleId+'/').set({
+            email : currUser.email,
+            displayName : currUser.displayName,
+            postedFiles : {},
+            superAdmin : false,
+            adminCourses : {}
+          })
+        }
       }
       else {
         this.setState({
@@ -69,6 +79,17 @@ class App extends Component {
 
       this.setUserInLocalStorage(this.state.user);
     })
+  }
+
+  isNewUser = (googleId) => {
+    database.ref('users/').on("value", (snapshot) => {
+      snapshot.forEach(user => {
+        if (user.key == googleId)
+          return false;
+      })
+    });
+
+    return true;
   }
 
   setUserInLocalStorage = (user) => {

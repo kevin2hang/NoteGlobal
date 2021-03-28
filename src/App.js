@@ -18,6 +18,8 @@ import ContentGrouping from './components/ContentGrouping';
 import UploadNote from './components/UploadNote'
 
 import Logo from './assets/logo512.png';
+import CloseIcon from '@material-ui/icons/Close';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -33,7 +35,8 @@ class App extends Component {
         email: null,
         photoUrl: null,
         googleId: null
-      }
+      },
+      showSignedIn: true
     }
     this.uiConfig = {
       signInFlow: "popup",
@@ -110,6 +113,10 @@ class App extends Component {
     localStorage.setItem("signedIn", String(this.state.signedIn));
   }
 
+  toggleShowSignedIn = () => {
+    this.setState({ showSignedIn: !this.state.showSignedIn });
+  }
+
   render() {
     return (
       <div>
@@ -126,26 +133,31 @@ class App extends Component {
                   />
                 }
               />
-            {/* <Route path="/:school/:course/:folder" component={}/> */}
-            {/* <Route path="/user/admin" component={}/> */}
-            {/* <Route path="/user/notes" component={}/> */}
-            {/* <Route path="/profile" component={Profile}/> */}
-          </div>
-          :
-          <div id='main-content'>
-            <div className='search-courses'>
-              <img className='logo' src={Logo}/>
-              <h1>Note Global</h1>
+              {/* <Route path="/:school/:course/:folder" component={}/> */}
+              {/* <Route path="/user/admin" component={}/> */}
+              {/* <Route path="/user/notes" component={}/> */}
+              {/* <Route path="/profile" component={Profile}/> */}
             </div>
-            <div id="welcome">Welcome to Note Global</div>
-            <div id="signInPrompt">Please sign in to continue!</div>
-            <StyledFirebaseAuth
-              uiConfig={this.uiConfig}
-              firebaseAuth={firebase.auth()} />
-          </div>
-        }
-      </Router>
-      {this.state.signedIn && <div id="signedInStatus">Signed In &#9989;</div>}
+            :
+            <div id='main-content'>
+              <div className='search-courses'>
+                <img className='logo' src={Logo} />
+                <h1>Note Global</h1>
+              </div>
+              <div id="welcome">Welcome to Note Global</div>
+              <div id="signInPrompt">Please sign in to continue!</div>
+              <StyledFirebaseAuth
+                uiConfig={this.uiConfig}
+                firebaseAuth={firebase.auth()} />
+            </div>
+          }
+        </Router>
+        <div className='signed-in-display'>
+          {this.state.signedIn && <div className='toggle-show-signed-in' onClick={this.toggleShowSignedIn}>
+            {this.state.showSignedIn ? <CloseIcon /> : <ArrowForwardIosIcon />}
+          </div>}
+          {this.state.signedIn && this.state.showSignedIn && <div id="signedInStatus">Signed In &#9989;</div>}
+        </div>
       </div>
     );
   };

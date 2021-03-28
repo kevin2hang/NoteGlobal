@@ -33,6 +33,10 @@ class CreateSchool extends Component {
             })
             this.props.readSchools();
         }
+
+        this.setState({
+            school : ''
+        })
     };
 
     schoolExists = (school) => {
@@ -49,7 +53,7 @@ class CreateSchool extends Component {
             <div>
                 <form onSubmit={this.submit}>
                     Create a School:
-                    <input type="text" placeholder="School Name" onChange={this.handleChange} />
+                    <input type="text" placeholder="School Name" value={this.state.school} onChange={this.handleChange} />
                     <input type="submit" />
                 </form>
             </div>

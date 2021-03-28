@@ -9,17 +9,17 @@ class SearchCourses extends Component {
         super(props);
 
         this.state = {
-            school: null,
-            course: null,
+            school: 'UCLA',
+            course: '',
             waitingFor: 'school',
             schools: [],
             courses: []
         }
     }
 
+
     componentDidMount() {
         this.readSchools()
-        this.setState({ school: this.state.schools.length > 0 ? this.states.schools[0] : '' });
     }
 
     readSchools = () => {
@@ -27,8 +27,8 @@ class SearchCourses extends Component {
         database.ref('schools/').on("value", (snapshot) => {
             let i = 0;
             snapshot.forEach(school => {
-                if (i = 0) {
-                    this.setState({ school: school });
+                if (i == 0) {
+                    this.setState({ school: school.key });
                 }
                 if (!this.schoolsContains(school.key))
                     newSchools.push(school.key);
@@ -56,8 +56,8 @@ class SearchCourses extends Component {
         database.ref('schools/' + school + '/').on("value", (snapshot) => {
             let i = 0;
             snapshot.forEach(course => {
-                if (i = 0) {
-                    this.setState({ course: course })
+                if (i == 0) {
+                    this.setState({ course: course.val() })
                 }
                 console.log(course.val())
                 newCourses.push(course.val());
@@ -112,7 +112,6 @@ class SearchCourses extends Component {
 
             this.setState({
                 waitingFor: 'school',
-                // school: this.state.schools.length > 0 ? this.states.schools[0] : ''
             });
         }
     }
@@ -123,8 +122,11 @@ class SearchCourses extends Component {
                 <button id="backBtn" onClick={this.moveBack}>Back</button>
                 {this.state.waitingFor == 'school' &&
                     <div className="dropdownForm">
+
                         <form onSubmit={this.schoolSubmit}>
                             <label>Choose a school (or create one if your's isn't there): </label>
+
+                            {console.log(this.state.school)}
                             <select value={this.state.school} id="schoolSelector" onChange={this.handleSchoolChange} value={this.state.school}>
                                 {this.state.schools.map(school => {
                                     return <option value={school}>{school}</option>
@@ -132,6 +134,7 @@ class SearchCourses extends Component {
                             </select>
                             <input type="submit" value="Submit" />
                         </form>
+
                         <CreateSchool readSchools={this.readSchools} />
                     </div>
                 }
@@ -141,7 +144,7 @@ class SearchCourses extends Component {
 
                         <form onSubmit={this.courseSubmit}>
                             <label>Choose a course (or create one if your's isn't there): </label>
-                            
+
                             <select value={this.state.course} id="courseSelector" onChange={this.handleCourseChange} value={this.state.course}>
                                 {this.state.courses.map(course => {
                                     return <option value={course}>{course}</option>

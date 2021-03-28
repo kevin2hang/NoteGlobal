@@ -48,6 +48,11 @@ class CreateCourse extends Component {
             console.log('deleting example course from schools/'+ this.state.school + '/' + key + '/');
         }
         database.ref('gen/' + this.state.school + '/courses/example-course/').remove();
+
+        this.setState({
+            school :'',
+            course : ''
+        })
     };
 
 
@@ -57,8 +62,8 @@ class CreateCourse extends Component {
             <div>
                 <form onSubmit={this.submit}>
                     Create a Course:
-                    <input type="text" placeholder="School Name" onChange={this.handleSchoolChange} />
-                    <input type="text" placeholder="Course name" onChange={this.handleCourseChange} />
+                    <input type="text" placeholder="School Name" value={this.state.school} onChange={this.handleSchoolChange} />
+                    <input type="text" placeholder="Course name" value={this.state.course} onChange={this.handleCourseChange} />
                     <input type="submit" />
                 </form>
             </div>

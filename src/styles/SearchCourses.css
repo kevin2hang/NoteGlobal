@@ -1,11 +1,12 @@
 .dropdownForm {
     margin : auto;
-    width : fit-content;
+    width : inherit;
     height : fit-content;
     border-radius: 2.5rem;
     background-color: rgb(196, 238, 223);
     padding : 3rem;
 }
+
 #backBtn {
     margin-bottom: 1rem;
 }
@@ -24,5 +25,5 @@
 }
 
 .create {
-    margin-left : 5rem;
+    /* margin-left : 5rem; */
 }

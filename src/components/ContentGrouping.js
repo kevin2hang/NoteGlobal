@@ -5,7 +5,7 @@ import { isSignedIn } from './localStorageFunctions';
 import { Link } from "react-router-dom";
 
 function ContentGrouping(props) {
-  const dbPath = props.path + props.name + '/';
+  const dbPath = props.path + props.name + '/notes/';
   const title = useState(props.name.split('-').join(' '));
   const [list, setList] = useState([]);
   const numPosts = useRef(0);
@@ -14,13 +14,13 @@ function ContentGrouping(props) {
     let newList = [];
     database.ref(dbPath).on('value', (snapshot) => {
       snapshot.forEach(item => {
-        if (item.val().fileUrl !== 'blank') {
+        // if (item.val().fileUrl !== 'blank') {
           newList.push
             (<li>
               <Link to={`${dbPath + item.key}`}>{item.val().fileUrl}</Link>
             </li>);
           numPosts.current += 1;
-        }
+        // }
       })
     })
     setList(newList);

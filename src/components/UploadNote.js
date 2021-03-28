@@ -49,8 +49,8 @@ class UploadNote extends Component{
                 // TODO: Upload base64 encoding as document's URL to DB
                 const dbPath = 'gen/'+this.props.school+'/courses/'+this.props.course+'/notes/'+this.props.folderName+'/';
                 const postObj = {
-                    'fileUrl': encodedFile,
-                    'filename': filename,
+                    'fileUrl': this.state.encodedFile,
+                    'filename': this.state.filename,
                     'ratingSum': 0,
                     'numRating': 0,
                     'ratings': {},

@@ -13,6 +13,8 @@ import database from './database'
 import SignOut from './components/SignOut';
 import NavBar from './components/NavBar'
 
+import ContentGrouping from './components/ContentGrouping';
+
 class App extends Component {
   constructor() {
     super();
@@ -130,6 +132,7 @@ class App extends Component {
               <SignOut />
             </div>
           }
+            <ContentGrouping path={''} name={'users'}></ContentGrouping>
           </Router>
         </body>
       </div>

@@ -5,14 +5,15 @@ import { Route, Link, useRouteMatch } from 'react-router-dom';
 import ContentGrouping from './ContentGrouping';
 
 export const ContentGroupingPreview = (props) => {
-  const {path, url} = useRouteMatch();
-  const newPath = url + '/' + props.name + '/';
+  const { path, url } = useRouteMatch();
 
   return (
     <div>
-        <Link to={newPath}>{props.name}</Link>
-     <Route path={newPath} render={() => <ContentGrouping path={props.dbPath} name={props.name}/>} >
-     </Route>
+      <Link to={url + '/' + props.name}>{props.name}</Link>
+      <Route path={path + '/' + props.name} render={() =>
+        <ContentGrouping path={props.dbPath} name={props.name} />}
+      >
+      </Route>
     </div>
 
   );

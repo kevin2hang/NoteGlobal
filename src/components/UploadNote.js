@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import NotePost from './NotePost'
 import database from '../database';
 import { isSignedIn, getGoogleId, getEmail } from './localStorageFunctions';
 
@@ -87,10 +86,6 @@ class UploadNote extends Component{
                 </div>)
                 :
                 <div>Upload Successful!</div>
-                // (    
-                // <div style={{marginLeft: "100px", marginTop: "300px", width: "100vw"}}>
-                //     <NotePost url={this.state.encodedFile} title={this.state.fileName} posted={new Date(Date.now())} rating={0}/>
-                // </div>)
                 }
             </>
             :

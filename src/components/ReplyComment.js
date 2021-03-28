@@ -21,7 +21,7 @@ class ReplyComment extends React.Component {
       <div className='reply-comment comment'>
         <span>{this.props.content}</span>
         <div className='right'>
-          <span className='time-display'>{this.props.postDate} - {this.props.postTime}</span>
+          <span className='time-display'>{this.props.dateDay} - {this.props.dateTime.substring(0,this.props.dateTime.length-6) + this.props.dateTime.substring(this.props.dateTime.length-3)}</span>
           <div className='flag-button' onClick={this.handleFlag}>
             {this.state.flagged ? <FlagIcon /> : <FlagOutlinedIcon />}
           </div>

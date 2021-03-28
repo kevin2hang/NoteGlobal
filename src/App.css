@@ -29,6 +29,7 @@ html {
 
 a, a:visited{
   text-decoration: none;
+  color: black;
 }
 
 a:visited {
@@ -43,6 +44,8 @@ a:visited {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+
+  font-weight: 600;
 }
 
 #main-content {

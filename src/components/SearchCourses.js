@@ -133,7 +133,7 @@ class SearchCourses extends Component {
     render() {
         return (
             <div>
-                <button id="backBtn" className="btn btn-secondary" onClick={this.moveBack}>Back</button>
+                {this.state.waitingFor == 'course' && <button id="backBtn" className="btn btn-secondary" onClick={this.moveBack}>Back</button>}
                 {this.state.waitingFor == 'school' &&
                     <div className="dropdownForm">
 

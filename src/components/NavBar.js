@@ -23,7 +23,7 @@ const NavBar = () => {
             <Link to="/user/notes">Uploaded Notes</Link>
             <Link to="/upload">Upload</Link>
             <Link to="/profile">Profile</Link> */}
-            {isSignedIn() && <SignOut />}
+            {signedIn && <SignOut />}
         </div>
     );
 

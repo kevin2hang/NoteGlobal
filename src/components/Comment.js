@@ -1,5 +1,8 @@
 import React from 'react';
 import database from '../database';
+import FlagIcon from '@material-ui/icons/Flag';
+import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
+import '../styles/Comment.css';
 
 class Comment extends React.Component {
   constructor(props) {
@@ -10,6 +13,7 @@ class Comment extends React.Component {
       showReplyInput: false,
       replyContent: '',
       replies: [],
+      flagged: false,
     }
   }
 
@@ -65,13 +69,20 @@ class Comment extends React.Component {
     this.setState({ replyContent: event.target.value });
   }
 
+  handleFlag = () => {
+    database.ref(dbPath+'/flagged/').update(!this.state.flagged);
+    this.setState({flagged: !this.state.flagged});
+  }
+
   render() {
     return (
       <div className='comment-block'>
         <div className='parent-comment comment'>
           <span>{this.props.content}</span>
           <span className='time-display'>{this.props.dateDay} - {this.props.dateTime}</span>
-          <div className='flag'></div>
+          <div className='flag-button' onClick={handleFlag}>
+            {this.state.flagged ? <FlagIcon/> : <FlagOutlinedIcon/>}
+          </div>
         </div>
         {this.state.replies.map((reply) => <ReplyComment {...reply} />)}
 

@@ -10,6 +10,7 @@ import '../styles/Viewer.css';
 import database from '../database';
 import Comment from './Comment';
 import { isSignedIn, getEmail, getGoogleId } from './localStorageFunctions';
+import '../styles/Note.css';
 
 class NotePost extends Component {
 

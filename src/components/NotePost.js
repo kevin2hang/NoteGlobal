@@ -46,6 +46,7 @@ class NotePost extends Component {
             })
         })
 
+        let googleId = getGoogleId();
         database.ref(this.dbPath +'/ratings/').on("value", snapshot => {
             snapshot.forEach(rating => {
                 if (rating.key == googleId) {

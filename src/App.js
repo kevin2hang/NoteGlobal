@@ -106,12 +106,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-        </header>
-        <body>
-          <Router>
+        <Router>
           {!this.state.signedIn &&
-            <div>
+            <div id='main-content'>
               <div id="welcome">Welcome to Note Global</div>
               <div id="signInPrompt">Please sign in to continue!</div>
               <StyledFirebaseAuth
@@ -119,9 +116,9 @@ class App extends Component {
                 firebaseAuth={firebase.auth()} />
             </div>
           }
+          <NavBar/>
           {this.state.signedIn &&
-            <div>
-              <NavBar/>
+            <div id='main-content'>
               {/* <Route path="/" component={}/>
               <Route path="/:school/:course" component={}/>
               <Route path="/:school/:course/:folder" component={}/>
@@ -130,11 +127,10 @@ class App extends Component {
               <Route path="/profile" component={Profile}/> */}
               <div>Signed In!</div>
               <SignOut />
+              <ContentGrouping path={''} name={'users'}></ContentGrouping>
             </div>
           }
-            <ContentGrouping path={''} name={'users'}></ContentGrouping>
-          </Router>
-        </body>
+        </Router>
       </div>
     );
   };

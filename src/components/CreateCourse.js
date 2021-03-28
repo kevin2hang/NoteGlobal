@@ -73,12 +73,12 @@ class CreateCourse extends Component {
 
     render() {
         return (
-            <div>
+            <div className="create">
                 <form onSubmit={this.submit}>
                     Create a Course:
                     <input type="text" placeholder="School Name" value={this.state.school} onChange={this.handleSchoolChange} />
                     <input type="text" placeholder="Course name" value={this.state.course} onChange={this.handleCourseChange} />
-                    <input className='submitBtn' type="submit" />
+                    <input className='btn' type="submit" />
                 </form>
             </div>
         )

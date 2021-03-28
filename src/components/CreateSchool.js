@@ -64,11 +64,11 @@ class CreateSchool extends Component {
 
     render() {
         return (
-            <div>
+            <div className="create">
                 <form onSubmit={this.submit}>
                     Create a School:
                     <input type="text" placeholder="School Name" value={this.state.school} onChange={this.handleChange} />
-                    <input className='submitBtn' type="submit" />
+                    <input className='btn' type="submit" />
                 </form>
             </div>
         )

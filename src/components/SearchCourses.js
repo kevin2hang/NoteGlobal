@@ -128,7 +128,7 @@ class SearchCourses extends Component {
     render() {
         return (
             <div>
-                <button id="backBtn" onClick={this.moveBack}>Back</button>
+                <button id="backBtn" className="btn" onClick={this.moveBack}>Back</button>
                 {this.state.waitingFor == 'school' &&
                     <div className="dropdownForm">
 
@@ -141,7 +141,7 @@ class SearchCourses extends Component {
                                     return <option value={school}>{school}</option>
                                 })}
                             </select>
-                            <input className="submitBtn" type="submit" value="Submit" />
+                            <input className="btn" type="submit" value="Submit" />
                         </form>
 
                         <CreateSchool readSchools={this.readSchools} />
@@ -159,7 +159,7 @@ class SearchCourses extends Component {
                                     return <option value={course}>{course}</option>
                                 })}
                             </select>
-                            <input className="submitBtn" type="submit" value="Submit" />
+                            <input className="btn" type="submit" value="Submit" />
                         </form>
 
                         <CreateCourse />

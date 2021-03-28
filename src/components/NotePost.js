@@ -150,7 +150,7 @@ class NotePost extends Component {
                             <Page pageNumber={this.state.pageNumber} height={650} className="viewer" />
                         </Document>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item xs={7} style={{width:'100%'}}>
                         <p> {this.props.title} </p>
                         <p> Posted {this.props.posted.toLocaleDateString()} </p>
                         <p> Average Rating: {this.props.rating} </p>

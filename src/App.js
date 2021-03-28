@@ -11,7 +11,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // components from component folder
 import database from './database'
 import SignOut from './components/SignOut';
-import NavBar from './components/NavBar'
+import NavBar from './components/NavBar';
+import SearchCourses from './components/SearchCourses';
 
 class App extends Component {
   constructor() {
@@ -94,11 +95,11 @@ class App extends Component {
 
   setUserInLocalStorage = (user) => {
     const localStorage = window.localStorage;
-    localStorage.addItem("displayName", user.displayName);
-    localStorage.addItem("email", user.email);
-    localStorage.addItem("photoUrl", user.photoUrl);
-    localStorage.addItem("googleId", user.googleId);
-    localStorage.addItem("signedIn", String(this.state.signedIn));
+    localStorage.setItem("displayName", user.displayName);
+    localStorage.setItem("email", user.email);
+    localStorage.setItem("photoUrl", user.photoUrl);
+    localStorage.setItem("googleId", user.googleId);
+    localStorage.setItem("signedIn", String(this.state.signedIn));
   }
 
   render() {

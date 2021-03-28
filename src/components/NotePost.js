@@ -205,7 +205,7 @@ class NotePost extends Component {
                     <Grid item lg={7} xs={12} style={{ width: '100%' }}>
                         <p> {this.props.title} </p>
                         <p> Posted: {this.props.posted.toLocaleDateString()} </p>
-                        <p> Average Rating: {this.props.rating.toFixed(2)} &#127775; </p>
+                        <p> Average Rating: {!isNaN(this.props.rating) ? this.props.rating.toFixed(2) : 'undetermined'} &#127775;</p>
                         <p> Rate This Note </p>
                         <Slider
                             min={0}

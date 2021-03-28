@@ -13,6 +13,7 @@ import database from './database'
 import SignOut from './components/SignOut';
 import NavBar from './components/NavBar';
 import SearchCourses from './components/SearchCourses';
+import Course from './components/Course'
 
 import ContentGrouping from './components/ContentGrouping';
 
@@ -120,12 +121,12 @@ class App extends Component {
           <NavBar/>
           {this.state.signedIn &&
             <div id='main-content'>
-              {/* <Route path="/" component={}/>
-              <Route path="/:school/:course" component={}/>
-              <Route path="/:school/:course/:folder" component={}/>
-              <Route path="/user/admin" component={}/>
-              <Route path="/user/notes" component={}/>
-              <Route path="/profile" component={Profile}/> */}
+              <Route path="/" component={SearchCourses}/>
+              <Route path="/:school/:course" component={Course}/>
+              {/* <Route path="/:school/:course/:folder" component={}/> */}
+              {/* <Route path="/user/admin" component={}/> */}
+              {/* <Route path="/user/notes" component={}/> */}
+              {/* <Route path="/profile" component={Profile}/> */}
               <div>Signed In!</div>
               <SignOut />
               <ContentGrouping path={''} name={'users'}></ContentGrouping>

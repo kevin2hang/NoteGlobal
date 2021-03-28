@@ -1,9 +1,10 @@
 import React from 'react';
 import database from '../database';
 
-import { BrowserRouter as Router, Route, Link, useRouteMatch } from 'react-router-dom';
+import { Route, Link, useRouteMatch } from 'react-router-dom';
+import ContentGrouping from './ContentGrouping';
 
-const ContentGroupingPreview = (props) => {
+export const ContentGroupingPreview = (props) => {
   const {path, url} = useRouteMatch();
   const newPath = url + '/' + props.name + '/';
 
@@ -28,9 +29,9 @@ class Course extends React.Component {
       <div className='course'>
         <h1>{this.props.schoolName} - {this.props.courseName}</h1>
         <div className='alt-course-name-display'>
-          {this.props.altNames.map((name) => {
+          {this.props.altNames !== undefined ? this.props.altNames.map((name) => {
             <div className='alt-course-name'>{name}</div>
-          })}
+          }) : ''}
         </div>
         {database.ref(this.props.dbPath + 'notes/').on("value", (snapshot) => {
           snapshot.forEach(contentGrouping => {
@@ -44,3 +45,5 @@ class Course extends React.Component {
     );
   }
 }
+
+export default Course;

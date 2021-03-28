@@ -41,10 +41,10 @@ class NotePost extends Component {
         // TODO: Grab current user's rating and flagged status from DB, and set state vals to them
         // TODO: Grab comments array
         database.ref(this.dbPath + '/').on("value", snapshot => {
-            this.setState({
-                flagged: snapshot.flagged,
-                rating: snapshot.ratingSum / (snapshot.numRatings * 10),
-            })
+            if (snapshot.flagged){
+                this.setState({flagged: snapshot.flagged})
+            }
+            this.setState({rating: snapshot.ratingSum / (snapshot.numRatings * 10)})
         })
 
         let copyComments = [];

@@ -13,19 +13,29 @@ class Comment extends React.Component {
     }
   }
 
+  doesNotContain = (dbKey) => {
+    for (let i = 0; i < this.state.replies.length; i++) {
+      const obj = this.state.replies[i];
+      if (obj.dbKey === dbKey) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   componentDidMount() {
     database.ref(dbPath + 'childComments/').on('value', (snapshot) => {
       snapshot.forEach(replyComment => {
-        if (this.state.replies.find(replyComment.key) === undefined) {
+        if (this.doesNotContain(replyComment.key)) {
           replies.push(
-            <ReplyComment
-              content={replyComment.val().content}
-              postDate={replyComment.val().dateDay}
-              postTime={replyComment.val().dateTime}
-              googleId={replyComment.val().googleId}
-              dbPath={dbPath + 'childComments/'}
-              dbKey={replyComment.key}
-            />
+            {
+              content: replyComment.val().content,
+              postDate: replyComment.val().dateDay,
+              postTime: replyComment.val().dateTime,
+              googleId: replyComment.val().googleId,
+              dbPath: dbPath + 'childComments/',
+              dbKey: replyComment.key,
+            }
           );
         }
       });
@@ -63,13 +73,12 @@ class Comment extends React.Component {
           <span className='time-display'>{this.props.dateDay} - {this.props.dateTime}</span>
           <div className='flag'></div>
         </div>
-        {this.state.replies.map((reply) => reply)}
+        {this.state.replies.map((reply) => <ReplyComment {...reply} />)}
 
         <div className='show-reply-button' onClick={this.toggleReplyInput}>Reply</div>
         {this.state.showReplyInput ?
           <div>
             <input className='reply-input' value={this.state.value} onChange={this.handleChange} />
-
             <button className onClick={this.addReplyComment}>Reply</button>
           </div>
           : ''}

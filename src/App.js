@@ -11,7 +11,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // components from component folder
 import database from './database'
 import SignOut from './components/SignOut';
-import NavBar from './components/NavBar'
+import NavBar from './components/NavBar';
+import SearchCourses from './components/SearchCourses';
+import Course from './components/Course'
+
+import ContentGrouping from './components/ContentGrouping';
 import UploadNote from './components/UploadNote'
 
 import { pdfjs } from "react-pdf";
@@ -98,23 +102,20 @@ class App extends Component {
 
   setUserInLocalStorage = (user) => {
     const localStorage = window.localStorage;
-    localStorage.addItem("displayName", user.displayName);
-    localStorage.addItem("email", user.email);
-    localStorage.addItem("photoUrl", user.photoUrl);
-    localStorage.addItem("googleId", user.googleId);
-    localStorage.addItem("signedIn", String(this.state.signedIn));
+    localStorage.setItem("displayName", user.displayName);
+    localStorage.setItem("email", user.email);
+    localStorage.setItem("photoUrl", user.photoUrl);
+    localStorage.setItem("googleId", user.googleId);
+    localStorage.setItem("signedIn", String(this.state.signedIn));
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-        </header>
-        <body>
-          <Router>
-            <UploadNote/>
+        <UploadNote/>
+        <Router>
           {!this.state.signedIn &&
-            <div>
+            <div id='main-content'>
               <div id="welcome">Welcome to Note Global</div>
               <div id="signInPrompt">Please sign in to continue!</div>
               <StyledFirebaseAuth
@@ -122,21 +123,21 @@ class App extends Component {
                 firebaseAuth={firebase.auth()} />
             </div>
           }
+          <NavBar/>
           {this.state.signedIn &&
-            <div>
-              <NavBar/>
-              {/* <Route path="/" component={}/>
-              <Route path="/:school/:course" component={}/>
-              <Route path="/:school/:course/:folder" component={}/>
-              <Route path="/user/admin" component={}/>
-              <Route path="/user/notes" component={}/>
-              <Route path="/profile" component={Profile}/> */}
+            <div id='main-content'>
+              <Route path="/" component={SearchCourses}/>
+              <Route path="/:school/:course" component={Course}/>
+              {/* <Route path="/:school/:course/:folder" component={}/> */}
+              {/* <Route path="/user/admin" component={}/> */}
+              {/* <Route path="/user/notes" component={}/> */}
+              {/* <Route path="/profile" component={Profile}/> */}
               <div>Signed In!</div>
               <SignOut />
+              <ContentGrouping path={''} name={'users'}></ContentGrouping>
             </div>
           }
-          </Router>
-        </body>
+        </Router>
       </div>
     );
   };

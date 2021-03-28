@@ -73,7 +73,7 @@ a:visited {
 }
 
 .logo {
-  width: 70%;
+  height : 45vh;
 }
 
 .toggle-show-signed-in:hover {

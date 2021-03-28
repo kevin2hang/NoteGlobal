@@ -54,12 +54,13 @@ class UploadNote extends Component{
                     'fileUrl': this.state.encodedFile,
                     'filename': ''+this.state.fileName,
                     'ratingSum': 0,
-                    'numRating': 0,
+                    'numRatings': 0,
                     'ratings': {},
                     'comments': {},
                     'googleId': getGoogleId(),
                     'email': getEmail(),
                     'flagged': false,
+                    'postTimeMs': Date.now()
                 };
                 console.log(postObj);
                 database.ref(dbPath).push(postObj);

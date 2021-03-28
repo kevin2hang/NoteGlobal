@@ -27,9 +27,10 @@ class NotePost extends Component {
         // TODO: Grab current user's rating and flagged status from DB, and set state vals to them
         // TODO: Grab comments array
         database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/').on("value", snapshot => {
+            console.log("snapshot: "+snapshot.flagged);
             this.setState({
-                flagged: snapshot.val().flagged,
-                rating: snapshot.val().ratingSum / (snapshot.val().numRatings * 10),
+                flagged: snapshot.flagged,
+                rating: snapshot.ratingSum / (snapshot.numRatings * 10),
             })
         })
 

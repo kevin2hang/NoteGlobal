@@ -27,6 +27,15 @@ class NotePost extends Component {
         this.dbPath = 'gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey;
     }
 
+    doesNotContain = (dbKey) => {
+        for (let i = 0; i < this.state.comments.length; i++) {
+            if (this.state.comments[i].key === dbKey) {
+                return false;
+            }
+        }
+        return true;
+    } 
+
     componentDidMount = () => {
         // TODO: Grab current user's rating and flagged status from DB, and set state vals to them
         // TODO: Grab comments array
@@ -37,14 +46,15 @@ class NotePost extends Component {
             })
         })
 
-        let comments = [];
+        let copyComments = [];
         database.ref(this.dbPath + '/comments/').on("value", snapshot => {
             snapshot.forEach(comment => {
-                // might need duplicate check
-                comments.push(comment);
+                if (this.doesNotContain(comment.key)) {
+                    copyComments.push(comment);
+                }
             })
             this.setState({
-                comments: comments
+                comments: copyComments
             })
         })
 

@@ -50,7 +50,7 @@ class NotePost extends Component {
         database.ref(this.dbPath + '/ratings/').on("value", snapshot => {
             snapshot.forEach(rating => {
                 if (rating.key == googleId) {
-                    this.setState({ rating: rating.key });
+                    this.setState({rating : rating.val()});
                     return; // break out of anonymous function
                 }
             })
@@ -133,9 +133,11 @@ class NotePost extends Component {
             newAvgRating = (oldRatingSum + value) / (10 * numRatings);
         }
         database.ref(this.dbPath + '/ratings/' + googleId + '/').set(value);
+    }
 
+    onChange = (event, value) => {
         this.setState({
-            rating: newAvgRating
+            rating: value
         })
     }
 
@@ -210,8 +212,10 @@ class NotePost extends Component {
                             max={10}
                             marks
                             valueLabelDisplay="auto"
-                            onChangeCommitted={this.onChangeCommitted} style={{ maxWidth: "200px" }}
-                            defaultValue={this.state.rating}
+                            onChange={this.onChange}
+                            onChangeCommitted={this.onChangeCommitted} 
+                            style={{ maxWidth: "200px" }}
+                            value={this.state.rating}
                         />
                         <div style={{ display: "flex" }}>
                             <IconButton onClick={this.handleFlag}>

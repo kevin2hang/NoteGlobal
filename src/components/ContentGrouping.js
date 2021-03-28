@@ -14,7 +14,7 @@ function ContentGrouping(props) {
   const numPosts = useRef(0);
   const params = useParams();
 
-  useEffect(() => {
+  const readFromDB = () => {
     let newList = [];
     database.ref(dbPath).on('value', (snapshot) => {
       snapshot.forEach(item => {
@@ -43,6 +43,9 @@ function ContentGrouping(props) {
       })
       setList(newList);
     })
+  }
+  useEffect(() => {
+    readFromDB();
   }, [])
 
   return (
@@ -52,6 +55,7 @@ function ContentGrouping(props) {
         school={params.school}
         course={params.course}
         folderName={params.folderName} 
+        readFromDB={readFromDB}
       />
       <ul>
         {list}

@@ -63,6 +63,7 @@ class UploadNote extends Component{
             };
             // Convert data to base64
             fileReader.readAsDataURL(fileToLoad);
+            this.props.readFromDB();
 
         }
         

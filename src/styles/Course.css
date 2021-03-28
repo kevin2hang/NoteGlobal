@@ -1,0 +1,19 @@
+.folders {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 80vw;
+}
+
+.content-grouping-preview {
+  border-radius: 20px;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  background-color: rgb(227, 242, 253);
+}
+
+.content-grouping-preview:hover {
+  filter: brightness(90%);
+}

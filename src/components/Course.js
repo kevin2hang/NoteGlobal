@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import database from '../database';
 
+import '../styles/Course.css';
+
 import { Route, Link, useRouteMatch, useParams } from 'react-router-dom';
 import ContentGrouping from './ContentGrouping';
 import { isSignedIn, getGoogleId, getEmail } from './localStorageFunctions';
@@ -9,7 +11,7 @@ export const ContentGroupingPreview = (props) => {
   const { path, url } = useRouteMatch();
 
   return (
-    <div>
+    <div className='content-grouping-preview'>
       <Link to={url + '/' + props.folderName}>{props.folderName}</Link>
     </div>
 
@@ -23,14 +25,6 @@ const Course = (props) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [folders, setFolders] = useState([]);
 
-  const doesNotContain = (folderName) => {
-    for (let i = 0; i < folders.length; i++) {
-      if (folders[i].folderName === folderName) {
-        return false;
-      }
-    }
-    return true;
-  }
   const updateFolders = () => {
     database.ref(dbPath).on("value", (contentGroupings) => {
       const copyFolders = [];
@@ -86,15 +80,9 @@ const Course = (props) => {
           <div className='alt-course-name'>{name}</div>
         }) : ''}
       </div>
-      {folders.map((obj) => <ContentGroupingPreview {...obj} /> )}
-      {/* {database.ref(dbPath).on("value", (contentGroupings) => {
-        contentGroupings.forEach(contentGrouping => {
-          <ContentGroupingPreview
-            dbPath={dbPath}
-            name={contentGrouping.key}
-          />
-        });
-      })} */}
+      <div className='folders'>
+        {folders.map((obj) => <ContentGroupingPreview {...obj} /> )}
+      </div>
       { !showAddForm ? 
         <button class='show-add-content-grouping-form btn btn-primary' onClick={toggleShowButton}>Add New Folder</button>
         : ''

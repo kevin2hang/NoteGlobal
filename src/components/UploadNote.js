@@ -86,10 +86,11 @@ class UploadNote extends Component{
                     </button>
                 </div>)
                 :
-                (    
-                <div style={{marginLeft: "100px", marginTop: "300px", width: "100vw"}}>
-                    <NotePost url={this.state.encodedFile} title={this.state.fileName} posted={new Date(Date.now())} rating={0}/>
-                </div>)
+                <div>Upload Successful!</div>
+                // (    
+                // <div style={{marginLeft: "100px", marginTop: "300px", width: "100vw"}}>
+                //     <NotePost url={this.state.encodedFile} title={this.state.fileName} posted={new Date(Date.now())} rating={0}/>
+                // </div>)
                 }
             </>
             :

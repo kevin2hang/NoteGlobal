@@ -116,7 +116,7 @@ class App extends Component {
           <div id='main-content'>
             <Route exact path="/" component={SearchCourses}/>
             <Route exact path="/:school/:course" component={Course}/>
-            <Route path='/:school/:course/:folderName'
+            <Route exact path='/:school/:course/:folderName'
               render={
                 (props)=> <ContentGrouping path={`gen/${props.match.params.school}/courses/${props.match.params.course}/notes/`}
                 name={props.match.params.folderName}

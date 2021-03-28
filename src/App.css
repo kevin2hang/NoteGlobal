@@ -55,3 +55,12 @@ a:visited {
   flex-direction: column;
   align-items: center;
 }
+
+#signedInStatus {
+  position : fixed;
+  left : 2rem;
+  bottom : 2.5rem;
+  font-size : 2rem;
+  color : black;
+  font-weight : 600;
+}

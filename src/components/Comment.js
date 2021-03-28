@@ -2,18 +2,20 @@ import React from 'react';
 import database from '../database';
 import FlagIcon from '@material-ui/icons/Flag';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
+import { getGoogleId, getEmail } from './localStorageFunctions';
+import ReplyComment from './ReplyComment';
 import '../styles/Comment.css';
 
 class Comment extends React.Component {
   constructor(props) {
     super(props);
 
-    const dbPath = this.props.path + this.props.dbKey + '/';
+    this.dbPath = this.props.path + this.props.dbKey + '/';
     this.state = {
       showReplyInput: false,
       replyContent: '',
       replies: [],
-      flagged: false,
+      flagged: this.props.flagged,
     }
   }
 
@@ -28,21 +30,23 @@ class Comment extends React.Component {
   }
 
   componentDidMount() {
-    database.ref(dbPath + 'childComments/').on('value', (snapshot) => {
+    const newReplies= this.state.replies;
+    database.ref(this.dbPath + 'childComments/').on('value', (snapshot) => {
       snapshot.forEach(replyComment => {
         if (this.doesNotContain(replyComment.key)) {
-          replies.push(
+          newReplies.push(
             {
               content: replyComment.val().content,
               postDate: replyComment.val().dateDay,
               postTime: replyComment.val().dateTime,
               googleId: replyComment.val().googleId,
-              dbPath: dbPath + 'childComments/',
+              dbPath: this.dbPath + 'childComments/',
               dbKey: replyComment.key,
             }
           );
         }
       });
+      this.setState({replies: newReplies});
     });
   }
 
@@ -54,7 +58,7 @@ class Comment extends React.Component {
       dateDay: new Date.toLocaleDateString(),
       dateTime: new Date.toLocaleTimeString()
     };
-    database.ref(dbPath + 'childComments/').push(replyComment);
+    database.ref(this.dbPath + 'childComments/').push(replyComment);
     this.setState({
       showReplyInput: false,
       replyContent: '',
@@ -70,7 +74,7 @@ class Comment extends React.Component {
   }
 
   handleFlag = () => {
-    database.ref(dbPath+'/flagged/').update(!this.state.flagged);
+    database.ref(this.dbPath).update({flagged :!this.state.flagged});
     this.setState({flagged: !this.state.flagged});
   }
 
@@ -80,7 +84,7 @@ class Comment extends React.Component {
         <div className='parent-comment comment'>
           <span>{this.props.content}</span>
           <span className='time-display'>{this.props.dateDay} - {this.props.dateTime}</span>
-          <div className='flag-button' onClick={handleFlag}>
+          <div className='flag-button' onClick={this.handleFlag}>
             {this.state.flagged ? <FlagIcon/> : <FlagOutlinedIcon/>}
           </div>
         </div>
@@ -97,3 +101,5 @@ class Comment extends React.Component {
     );
   }
 }
+
+export default Comment;

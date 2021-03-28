@@ -73,8 +73,8 @@ class NotePost extends Component {
         let newAvgRating;
         let ratedB4 = this.userRatedBefore();
 
-        let oldRatingSum;
-        let numRatings;
+        let oldRatingSum = 0;
+        let numRatings = 0;
         // read
         database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/').on("value", snapshot => {
             oldRatingSum = snapshot.val().ratingSum;

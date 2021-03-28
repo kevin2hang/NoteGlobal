@@ -53,6 +53,9 @@ class Comment extends React.Component {
   }
 
   addReplyComment = () => {
+    if (this.state.replyContent === '' || this.state.replyContent.trim() === '') {
+      return;
+    }
     let replyComment = {
       content: this.state.replyContent,
       googleId: getGoogleId(),

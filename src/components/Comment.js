@@ -22,7 +22,7 @@ class Comment extends React.Component {
   doesNotContain = (dbKey) => {
     for (let i = 0; i < this.state.replies.length; i++) {
       const obj = this.state.replies[i];
-      if (obj.dbKey === dbKey) {
+      if (obj.dbKey == dbKey) {
         return false;
       }
     }
@@ -31,6 +31,7 @@ class Comment extends React.Component {
 
   componentDidMount() {
     const newReplies= this.state.replies;
+
     database.ref(this.dbPath + 'childComments/').on('value', (snapshot) => {
       snapshot.forEach(replyComment => {
         if (this.doesNotContain(replyComment.key)) {
@@ -93,13 +94,12 @@ class Comment extends React.Component {
         </div>
         {this.state.replies.map((reply) => <ReplyComment {...reply} />)}
 
-        <button className='show-reply-button' onClick={this.toggleReplyInput}>Reply</button>
         {this.state.showReplyInput ?
           <div>
             <input className='reply-input' value={this.state.value} onChange={this.handleChange} />
             <button className onClick={this.addReplyComment}>Reply</button>
           </div>
-          : ''}
+          : <button className='show-reply-button' onClick={this.toggleReplyInput}>Reply</button>}
       </div>
     );
   }

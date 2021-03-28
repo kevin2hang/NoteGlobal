@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import database from '../database';
 
+import '../styles/SearchCourses.css';
+
 class CreateCourse extends Component {
     constructor(props) {
         super(props);
@@ -24,6 +26,18 @@ class CreateCourse extends Component {
 
     submit = (e) => {
         e.preventDefault();
+        // trimming doesn't work
+        let school = this.state.school;
+        let course = this.state.course;
+        let trimmedSchool = school.trim();
+        let trimmedCourse = course.trim();
+        this.setState({
+            school : trimmedSchool,
+            course : trimmedCourse
+        });
+
+        if (this.state.school == '' || this.state.course == '')
+            return;
 
         database.ref('schools/' + this.state.school + '/').push(this.state.course)
      
@@ -64,7 +78,7 @@ class CreateCourse extends Component {
                     Create a Course:
                     <input type="text" placeholder="School Name" value={this.state.school} onChange={this.handleSchoolChange} />
                     <input type="text" placeholder="Course name" value={this.state.course} onChange={this.handleCourseChange} />
-                    <input type="submit" />
+                    <input className='submitBtn' type="submit" />
                 </form>
             </div>
         )

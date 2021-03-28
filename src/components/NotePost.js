@@ -42,7 +42,7 @@ class NotePost extends Component {
         // TODO: Grab comments array
         database.ref(this.dbPath + '/').on("value", snapshot => {
             this.setState({
-                flagged: snapshot.flagged,
+                flagged: snapshot.flagged !== undefined ? snapshot.flagged : false,
                 rating: snapshot.ratingSum / (snapshot.numRatings * 10),
             })
         })
@@ -76,6 +76,8 @@ class NotePost extends Component {
     handleFlag = () => {
         this.setState({ flagged: !this.state.flagged })
         // TODO: Change user flag status in DB
+        console.log(this.dbPath)
+        console.log(this.state.flagged)
         database.ref(this.dbPath + '/').update({
             flagged: this.state.flagged
         })

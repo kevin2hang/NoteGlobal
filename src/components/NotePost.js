@@ -50,7 +50,7 @@ class NotePost extends Component {
         database.ref(this.dbPath +'/ratings/').on("value", snapshot => {
             snapshot.forEach(rating => {
                 if (rating.key == googleId) {
-                    this.setState({rating : rating.key});
+                    this.setState({rating : rating.val()});
                     return; // break out of anonymous function
                 }
             })

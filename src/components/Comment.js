@@ -35,11 +35,12 @@ class Comment extends React.Component {
     database.ref(this.dbPath + 'childComments/').on('value', (snapshot) => {
       snapshot.forEach(replyComment => {
         if (this.doesNotContain(replyComment.key)) {
+          const date = new Date(replyComment.val().postTimeMs)
           newReplies.push(
             {
               content: replyComment.val().content,
-              dateDay: replyComment.val().dateDay,
-              dateTime: replyComment.val().dateTime,
+              dateDay: date.toLocaleDateString(),
+              dateTime: date.toLocaleTimeString(),
               googleId: replyComment.val().googleId,
               flagged: replyComment.val().flagged,
               dbPath: this.dbPath + 'childComments/',
@@ -60,8 +61,7 @@ class Comment extends React.Component {
       content: this.state.replyContent,
       googleId: getGoogleId(),
       email: getEmail(),
-      dateDay: new Date().toLocaleDateString(),
-      dateTime: new Date().toLocaleTimeString()
+      postTimeMs: Date.now()
     };
     database.ref(this.dbPath + 'childComments/').push(replyComment);
     this.setState({

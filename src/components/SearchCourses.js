@@ -17,9 +17,8 @@ class SearchCourses extends Component {
         }
     }
 
-
-    componentDidMount() {
-        this.readSchools()
+    componentDidMount = () => {
+        this.readSchools();
     }
 
     readSchools = () => {
@@ -27,19 +26,20 @@ class SearchCourses extends Component {
         database.ref('schools/').on("value", (snapshot) => {
             let i = 0;
             snapshot.forEach(school => {
+                console.log(`${i}: ${school.key}`)
                 if (i == 0) {
-                    this.setState({ school: school.key });
+                    this.setState({ 
+                        school: school.key 
+                    });
                 }
                 if (!this.schoolsContains(school.key))
                     newSchools.push(school.key);
                 i++;
             })
-        })
-
-        this.setState({
-            schools: newSchools
+            this.setState({schools: newSchools})
         })
     }
+    
     schoolsContains = (school) => {
         for (let i = 0; i < this.state.schools.length; i++) {
             if (school == this.state.schools[i])

@@ -11,10 +11,6 @@ export const ContentGroupingPreview = (props) => {
   return (
     <div>
       <Link to={url + '/' + props.folderName}>{props.folderName}</Link>
-      <Route path={path + '/' + props.folderName} render={() =>
-        <ContentGrouping path={props.dbPath} name={props.folderName} />}
-      >
-      </Route>
     </div>
 
   );
@@ -52,6 +48,15 @@ const Course = (props) => {
   }
 
   const addContentGrouping = () => {
+    database.ref(dbPath).on("value", (contentGroupings) => {
+      contentGroupings.forEach(contentGrouping => {
+        console.log('db key: '+contentGrouping.key);
+        console.log('to be added: ' +newContentGrouping);
+        if (contentGrouping.key == newContentGrouping) {
+           return false;
+        }
+      })
+    });
     const blankNotePost = {
       'fileUrl': 'blank',
     };
@@ -59,6 +64,7 @@ const Course = (props) => {
     setNewContentGrouping('');
     setShowAddForm(false);
     updateFolders();
+    return true;
   }
 
   const toggleShowButton = () => {

@@ -121,15 +121,23 @@ class App extends Component {
           <NavBar/>
           {this.state.signedIn &&
             <div id='main-content'>
-              <Route path="/" component={SearchCourses}/>
-              <Route path="/:school/:course" component={Course}/>
+              <Route exact path="/" component={SearchCourses}/>
+              <Route exact path="/:school/:course" component={Course}/>
+              <Route path='/:school/:course/:folderName'
+                render={
+                  (props)=> <ContentGrouping path={`gen/${props.match.params.school}/courses/${props.match.params.course}/notes/`}
+                  name={props.match.params.folderName}
+                  />
+                }
+                />
+                
               {/* <Route path="/:school/:course/:folder" component={}/> */}
               {/* <Route path="/user/admin" component={}/> */}
               {/* <Route path="/user/notes" component={}/> */}
               {/* <Route path="/profile" component={Profile}/> */}
               <div>Signed In!</div>
               <SignOut />
-              <ContentGrouping path={''} name={'users'}></ContentGrouping>
+              {/* <ContentGrouping path={''} name={'users'}></ContentGrouping> */}
             </div>
           }
         </Router>

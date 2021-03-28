@@ -12,6 +12,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import database from './database'
 import SignOut from './components/SignOut';
 import NavBar from './components/NavBar'
+import UploadNote from './components/UploadNote'
+
+import { pdfjs } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 class App extends Component {
   constructor() {
@@ -108,6 +112,7 @@ class App extends Component {
         </header>
         <body>
           <Router>
+            <UploadNote/>
           {!this.state.signedIn &&
             <div>
               <div id="welcome">Welcome to Note Global</div>

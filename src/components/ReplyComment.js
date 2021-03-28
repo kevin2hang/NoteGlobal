@@ -19,3 +19,5 @@ class ReplyComment extends React.Component {
     );
   } 
 }
+
+export default ReplyComment;

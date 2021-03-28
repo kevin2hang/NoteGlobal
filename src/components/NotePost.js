@@ -8,8 +8,8 @@ import FlagIcon from '@material-ui/icons/Flag';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import '../styles/Viewer.css';
 import database from '../database';
-import { getGoogleId } from './localStorageFunctions';
-import '../styles/Note.css';
+import Comment from './Comment';
+import { isSignedIn, getEmail, getGoogleId } from './localStorageFunctions';
 
 class NotePost extends Component {
 
@@ -20,14 +20,17 @@ class NotePost extends Component {
             pageNumber: 1,
             flagged: false,
             rating: 0,
-            comments: []
+            comments: [],
+            showAddComment: false,
+            commentVal: ''
         }
+        this.dbPath = 'gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey;
     }
 
     componentDidMount = () => {
         // TODO: Grab current user's rating and flagged status from DB, and set state vals to them
         // TODO: Grab comments array
-        database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/').on("value", snapshot => {
+        database.ref(this.dbPath + '/').on("value", snapshot => {
             this.setState({
                 flagged: snapshot.flagged,
                 rating: snapshot.ratingSum / (snapshot.numRatings * 10),
@@ -35,10 +38,10 @@ class NotePost extends Component {
         })
 
         let comments = [];
-        database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/comments/').on("value", snapshot => {
+        database.ref(this.dbPath + '/comments/').on("value", snapshot => {
             snapshot.forEach(comment => {
                 // might need duplicate check
-                comments.push(comment.val());
+                comments.push(comment);
             })
             this.setState({
                 comments: comments
@@ -62,7 +65,7 @@ class NotePost extends Component {
     handleFlag = () => {
         this.setState({ flagged: !this.state.flagged })
         // TODO: Change user flag status in DB
-        database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/').update({
+        database.ref(this.dbPath + '/').update({
             flagged: this.state.flagged
         })
     }
@@ -77,7 +80,7 @@ class NotePost extends Component {
         let oldRatingSum = 0;
         let numRatings = 0;
         // read
-        database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/').on("value", snapshot => {
+        database.ref(this.dbPath + '/').on("value", snapshot => {
             oldRatingSum = snapshot.val().ratingSum;
             numRatings = snapshot.val().numRatings;
         })
@@ -87,12 +90,12 @@ class NotePost extends Component {
         if (ratedB4) {
             let oldRating = 0;
             // read
-            database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/ratings/' + googleId + '/').on("value", snapshot => {
+            database.ref(this.dbPath + '/ratings/' + googleId + '/').on("value", snapshot => {
                 oldRating = snapshot.val();
             })
 
             // update
-            database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/').update({
+            database.ref(this.dbPath + '/').update({
                 ratingSum: (oldRatingSum - oldRating + value)
             });
 
@@ -100,14 +103,14 @@ class NotePost extends Component {
         }
         else {
             numRatings++;
-            database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/').update({
+            database.ref(this.dbPath + '/').update({
                 numRatings: numRatings,
                 ratingSum: oldRatingSum + value
             })
 
             newAvgRating = (oldRatingSum + value) / (10 * numRatings);
         }
-        database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/ratings/' + googleId + '/').set(value);
+        database.ref(this.dbPath + '/ratings/' + googleId + '/').set(value);
 
         this.setState({
             rating: newAvgRating
@@ -117,7 +120,7 @@ class NotePost extends Component {
     userRatedBefore = () => {
         let googleId = getGoogleId();
         let found = false;
-        database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/ratings/').on("value", snapshot => {
+        database.ref(this.dbPath + '/ratings/').on("value", snapshot => {
             snapshot.forEach(rating => {
                 if (rating.key == googleId) {
                     found = true;
@@ -126,6 +129,31 @@ class NotePost extends Component {
         })
 
         return found;
+    }
+
+    toggleShowAddComment = () => {
+        this.setState({showAddComment: !this.state.showAddComment});
+    }
+
+    addComment = () => {
+        if (this.state.commentVal === '' || this.state.commentVal.trim() === '') {
+            return;
+        }
+        const newComment = {
+            content: this.state.commentVal,
+            googleId: getGoogleId(),
+            email: getEmail(),
+            dateDay: new Date().toLocaleDateString(),
+            dateTime: new Date().toLocaleTimeString(),
+            flagged: false,
+            childComments: {}
+        };
+        database.ref(this.dbPath+'/comments/').push(newComment);
+        this.setState({showAddComment: false, commentVal: ''});
+    }
+
+    handleText = (event) => {
+        this.setState({commentVal: event.target.value});
     }
 
     render() {
@@ -171,6 +199,23 @@ class NotePost extends Component {
                         </div>
                         <p> Comments </p>
                         {/* TODO: Add Comments */}
+                        {this.state.comments.map((commentObj) =>
+                            <Comment
+                                content={commentObj.val().content}
+                                path={this.dbPath+'/comments/'}
+                                dbKey={commentObj.key}
+                                dateDay={commentObj.val().dateDay}
+                                dateTime={commentObj.val().dateTime}
+                                flagged={commentObj.val().flagged}
+                            />
+                        )}
+                        {this.state.showAddComment ? 
+                            <>
+                            <input className='add-comment-form' value={this.state.commentVal} onChange={this.handleText}/>
+                            <button className='add-comment-btn' onClick={this.addComment}>Add Comment</button>
+                            </>
+                        : <button className='show-add-comment-btn' onClick={this.toggleShowAddComment}>Add Comment</button>
+                        }
                     </Grid>
                 </Grid>
             </>

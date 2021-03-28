@@ -6,6 +6,8 @@ import CreateCourse from './CreateCourse';
 
 import '../styles/SearchCourses.css';
 
+import Logo from '../assets/logo512.png';
+
 class SearchCourses extends Component {
     constructor(props) {
         super(props);
@@ -132,8 +134,9 @@ class SearchCourses extends Component {
 
     render() {
         return (
-            <div>
-                {this.state.waitingFor == 'course' && <button id="backBtn" className="btn btn-secondary" onClick={this.moveBack}>Back</button>}
+            <div className='centered'>
+                <img className='logo' src={Logo}/>
+                <h1>Note Global</h1>
                 {this.state.waitingFor == 'school' &&
                     <div className="dropdownForm">
 
@@ -154,7 +157,7 @@ class SearchCourses extends Component {
 
                 {this.state.waitingFor == 'course' &&
                     <div className="dropdownForm">
-
+                        <button id="backBtn" className="btn btn-secondary" onClick={this.moveBack}>Back</button>
                         <form onSubmit={this.courseSubmit}>
                             <label>Choose a course (or create one if your's isn't there): </label>
 

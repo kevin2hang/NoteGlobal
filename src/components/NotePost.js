@@ -88,7 +88,7 @@ class NotePost extends Component {
         let googleId = getGoogleId();
 
         if (ratedB4) {
-            let oldRating;
+            let oldRating = 0;
             // read
             database.ref(this.dbPath + '/ratings/' + googleId + '/').on("value", snapshot => {
                 oldRating = snapshot.val();
@@ -119,15 +119,16 @@ class NotePost extends Component {
 
     userRatedBefore = () => {
         let googleId = getGoogleId();
+        let found = false;
         database.ref(this.dbPath + '/ratings/').on("value", snapshot => {
             snapshot.forEach(rating => {
                 if (rating.key == googleId) {
-                    return true;
+                    found = true;
                 }
             })
         })
 
-        return false;
+        return found;
     }
 
     toggleShowAddComment = () => {
@@ -177,7 +178,7 @@ class NotePost extends Component {
                             <Page pageNumber={this.state.pageNumber} height={650} className="viewer" />
                         </Document>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item xs={7} style={{width:'100%'}}>
                         <p> {this.props.title} </p>
                         <p> Posted {this.props.posted.toLocaleDateString()} </p>
                         <p> Average Rating: {this.props.rating} </p>

@@ -208,7 +208,7 @@ class NotePost extends Component {
                             </IconButton>
                             <p> Flag for Cheating</p>
                         </div>
-                        <p> Comments </p>
+                        <p> <h6>Comments </h6></p>
                         {/* TODO: Add Comments */}
                         {this.state.comments.map((commentObj) =>
                             <Comment

@@ -36,13 +36,14 @@ class UploadNote extends Component{
             // Select the very first file from list
             let fileToLoad = selectedFile;
             fileName = fileToLoad.name;
+            this.setState({fileName: fileName})
             // FileReader function for read the file.
             let fileReader = new FileReader();
             // Onload of file read the file content
             fileReader.onload = (fileLoadedEvent) => {
                 file = fileLoadedEvent.target.result;
                 // Print data in console
-                this.setState({encodedFile: file, fileName: fileName})
+                this.setState({encodedFile: file})
                 console.log(this.state.encodedFile)
 
                 // TODO: Create new entry for document in DB

@@ -47,10 +47,11 @@ class UploadNote extends Component{
 
                 // TODO: Create new entry for document in DB
                 // TODO: Upload base64 encoding as document's URL to DB
-                const dbPath = 'gen/'+this.props.school+'/courses/'+this.props.course+'/notes/'+this.props.folderName+'/';
+                const dbPath = 'gen/'+this.props.school+'/courses/'+this.props.course+'/notes/'+this.props.folderName+'/notes/';
+                console.log('dbPath: ' +dbPath);
                 const postObj = {
                     'fileUrl': this.state.encodedFile,
-                    'filename': this.state.filename,
+                    'filename': ''+this.state.filename,
                     'ratingSum': 0,
                     'numRating': 0,
                     'ratings': {},
@@ -59,6 +60,7 @@ class UploadNote extends Component{
                     'email': getEmail(),
                     'flagged': false,
                 };
+                console.log(postObj);
                 database.ref(dbPath).push(postObj);
 
             };

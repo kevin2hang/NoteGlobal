@@ -2,9 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import database from '../database';
 import { isSignedIn } from './localStorageFunctions';
 
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
+import UploadNote from './UploadNote';
 
 function ContentGrouping(props) {
+  const {path, url} = useRouteMatch();
   const dbPath = props.path + props.name + '/notes/';
   const title = useState(props.name.split('-').join(' '));
   const [list, setList] = useState([]);
@@ -26,6 +28,12 @@ function ContentGrouping(props) {
     setList(newList);
   }, [])
 
+  const UploadFile = () => {
+    return (
+      <Link to={url+'/upload'}>Upload File</Link>
+    );
+  }
+
   return (
     <div>
       <h3>{title}</h3>
@@ -36,6 +44,7 @@ function ContentGrouping(props) {
         <div>There are no notes yet.</div>
         :''
       }
+      <UploadFile />
     </div>
   )
 }

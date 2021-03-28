@@ -73,11 +73,10 @@ class SearchCourses extends Component {
                 newCourses.push(course.val());
                 i++;
             })
+            this.setState({
+                courses: newCourses
+            })
         });
-
-        this.setState({
-            courses: newCourses
-        })
     }
 
     handleSchoolChange = (e) => {

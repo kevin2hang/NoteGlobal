@@ -44,12 +44,9 @@ class UploadNote extends Component{
                 file = fileLoadedEvent.target.result;
                 // Print data in console
                 this.setState({encodedFile: file})
-                console.log(this.state.encodedFile)
+                // console.log(this.state.encodedFile)
 
-                // TODO: Create new entry for document in DB
-                // TODO: Upload base64 encoding as document's URL to DB
                 const dbPath = 'gen/'+this.props.school+'/courses/'+this.props.course+'/notes/'+this.props.folderName+'/notes/';
-                console.log('dbPath: ' +dbPath);
                 const postObj = {
                     'fileUrl': this.state.encodedFile,
                     'filename': ''+this.state.fileName,
@@ -62,7 +59,6 @@ class UploadNote extends Component{
                     'flagged': false,
                     'postTimeMs': Date.now()
                 };
-                console.log(postObj);
                 database.ref(dbPath).push(postObj);
 
             };

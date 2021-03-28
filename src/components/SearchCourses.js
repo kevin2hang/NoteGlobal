@@ -158,7 +158,7 @@ class SearchCourses extends Component {
                             <input className="submitBtn btn btn-primary" type="submit" value="Submit" />
                         </form>
 
-                        <CreateCourse />
+                        <CreateCourse school={this.state.school}/>
                     </div>
                 }
                 {this.state.waitingFor == 'nothing' &&

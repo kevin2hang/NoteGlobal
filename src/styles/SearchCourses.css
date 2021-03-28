@@ -9,19 +9,11 @@
 #backBtn {
     margin-bottom: 1rem;
 }
-.btn {
-    border : none;
-    outline : none;
-    border-radius: 1rem;
-    padding : 0.5rem;
-    margin: 0.3rem;
-    box-shadow: 1px 1px 7px 1px;
-}
 
 .btn {
     border : none;
     outline : none;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     padding : 0.5rem;
     margin: 0.3rem;
     box-shadow: 1px 1px 7px 1px;

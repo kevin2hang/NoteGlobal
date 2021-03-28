@@ -7,16 +7,16 @@ class CreateCourse extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            school: '',
+            // school: '',
             course: ''
         }
     }
 
-    handleSchoolChange = (e) => {
-        this.setState({
-            school: e.target.value
-        })
-    };
+    // handleSchoolChange = (e) => {
+    //     this.setState({
+    //         school: e.target.value
+    //     })
+    // };
 
     handleCourseChange = (e) => {
         this.setState({
@@ -27,21 +27,21 @@ class CreateCourse extends Component {
     submit = (e) => {
         e.preventDefault();
         // trimming doesn't work
-        let school = this.state.school;
-        let course = this.state.course;
-        let trimmedSchool = school.trim();
-        let trimmedCourse = course.trim();
-        this.setState({
-            school : trimmedSchool,
-            course : trimmedCourse
-        });
+        // let school = this.state.school;
+        // let course = this.state.course;
+        // let trimmedSchool = school.trim();
+        // let trimmedCourse = course.trim();
+        // this.setState({
+        //     school : trimmedSchool,
+        //     course : trimmedCourse
+        // });
 
-        if (this.state.school == '' || this.state.course == '')
+        if (this.props.school == '' || this.state.course == '')
             return;
 
-        database.ref('schools/' + this.state.school + '/').push(this.state.course)
+        database.ref('schools/' + this.props.school + '/').push(this.state.course)
      
-        database.ref('gen/' + this.state.school + '/courses/' + this.state.course + '/').set({
+        database.ref('gen/' + this.props.school + '/courses/' + this.state.course + '/').set({
             'alternate-names': {},
             'notes': {},
             'verifiedAdmins': { '0': '02347407531' },
@@ -49,7 +49,7 @@ class CreateCourse extends Component {
         })
 
         let key = undefined;
-        database.ref('schools/' + this.state.school + '/').on("value", snapshot => {
+        database.ref('schools/' + this.props.school + '/').on("value", snapshot => {
             snapshot.forEach(course => {
                 if (course.val() == 'example-course')
                     key = course.key;
@@ -57,9 +57,9 @@ class CreateCourse extends Component {
         })
 
         if (key != undefined) {
-            database.ref('schools/' + this.state.school + '/' + key + '/').remove();
+            database.ref('schools/' + this.props.school + '/' + key + '/').remove();
         }
-        database.ref('gen/' + this.state.school + '/courses/example-course/').remove();
+        database.ref('gen/' + this.props.school + '/courses/example-course/').remove();
 
         this.setState({
             school :'',
@@ -74,7 +74,7 @@ class CreateCourse extends Component {
             <div className="create">
                 <form onSubmit={this.submit}>
                     Create a Course:
-                    <input className="form-control" type="text" placeholder="School Name" value={this.state.school} onChange={this.handleSchoolChange} />
+                    {/* <input className="form-control" type="text" placeholder={this.props.school} value={this.state.school} onChange={this.handleSchoolChange} /> */}
                     <input className="form-control" type="text" placeholder="Course name" value={this.state.course} onChange={this.handleCourseChange} />
                     <input className='submitBtn btn btn-primary' type="submit" />
                 </form>

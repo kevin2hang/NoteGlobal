@@ -1,0 +1,18 @@
+.dropdownForm {
+    margin : auto;
+    width : fit-content;
+    height : fit-content;
+    border-radius: 25px;
+}
+
+.submitBtn {
+    border : none;
+    outline : none;
+    border-radius: 1rem;
+    padding : 0.5rem;
+    margin: 0.3rem;
+}
+.submitBtn:hover {
+    cursor : pointer;
+    filter: brightness(90%);
+}

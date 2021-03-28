@@ -11,10 +11,10 @@ class UploadNote extends Component{
         this.state = {
             selectedFile: null,
             encodedFile: null,
-            fileNameL: null,
+            fileName: null,
             numPages: null,
             pageNumber: 1,
-            signedIn: isSignedIn,
+            signedIn: isSignedIn(),
         }
     }
 
@@ -52,14 +52,15 @@ class UploadNote extends Component{
                 console.log('dbPath: ' +dbPath);
                 const postObj = {
                     'fileUrl': this.state.encodedFile,
-                    'filename': ''+this.state.filename,
+                    'filename': ''+this.state.fileName,
                     'ratingSum': 0,
-                    'numRating': 0,
+                    'numRatings': 0,
                     'ratings': {},
                     'comments': {},
                     'googleId': getGoogleId(),
                     'email': getEmail(),
                     'flagged': false,
+                    'postTimeMs': Date.now()
                 };
                 console.log(postObj);
                 database.ref(dbPath).push(postObj);
@@ -79,7 +80,7 @@ class UploadNote extends Component{
     render() {
         return(
             <>
-            {this.state.signedIn() ? 
+            {this.state.signedIn ? 
             <>
                 {!this.state.encodedFile ?
                 (<div>

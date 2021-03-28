@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import database from '../database';
 import { isSignedIn } from './localStorageFunctions';
 
-import { Link, useRouteMatch } from "react-router-dom";
-import UploadNote from './UploadNote';
+import { Link, useRouteMatch, useParams } from "react-router-dom";
+import NotePost from './NotePost';
 
 function ContentGrouping(props) {
   const {path, url} = useRouteMatch();
@@ -11,6 +11,7 @@ function ContentGrouping(props) {
   const title = useState(props.name.split('-').join(' '));
   const [list, setList] = useState([]);
   const numPosts = useRef(0);
+  const params = useParams();
 
   useEffect(() => {
     let newList = [];
@@ -18,9 +19,21 @@ function ContentGrouping(props) {
       snapshot.forEach(item => {
         // if (item.val().fileUrl !== 'blank') {
           newList.push
-            (<li>
-              <Link to={`${dbPath + item.key}`}>{item.val().fileUrl}</Link>
-            </li>);
+            (
+              <NotePost
+                school={params.school}
+                course={params.course}
+                folderName={params.folderName}
+                dbKey = {item.key}
+                url= {item.val().fileUrl}
+                title={item.val().filename}
+                rating= {item.val().ratingSum/item.val().numRatings}
+                posted = {new Date(item.val().postTimeMs)}
+              />
+            // <li>
+            //   <Link to={`${dbPath + item.key}`}>{item.val().fileUrl}</Link>
+            // </li>
+            );
           numPosts.current += 1;
         // }
       })

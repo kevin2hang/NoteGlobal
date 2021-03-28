@@ -10,7 +10,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // components from component folder
 import database from './database'
-import SignOut from './components/SignOut';
 import NavBar from './components/NavBar';
 import SearchCourses from './components/SearchCourses';
 import Course from './components/Course'
@@ -111,49 +110,42 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Router>
-          {!this.state.signedIn &&
-            <div id='main-content'>
-              <div id="welcome">Welcome to Note Global</div>
-              <div id="signInPrompt">Please sign in to continue!</div>
-              <StyledFirebaseAuth
-                uiConfig={this.uiConfig}
-                firebaseAuth={firebase.auth()} />
-            </div>
-          }
-          <NavBar/>
-          {this.state.signedIn &&
-          <>
-            <div id='main-content'>
-              <Route exact path="/" component={SearchCourses}/>
-              <Route exact path="/:school/:course" component={Course}/>
-              <Route path='/:school/:course/:folderName'
-                render={
-                  (props)=> <ContentGrouping path={`gen/${props.match.params.school}/courses/${props.match.params.course}/notes/`}
-                  name={props.match.params.folderName}
-                  />
-                }
+      <Router>
+        <NavBar/>
+        {this.state.signedIn ? 
+          <div id='main-content'>
+            <Route exact path="/" component={SearchCourses}/>
+            <Route exact path="/:school/:course" component={Course}/>
+            <Route path='/:school/:course/:folderName'
+              render={
+                (props)=> <ContentGrouping path={`gen/${props.match.params.school}/courses/${props.match.params.course}/notes/`}
+                name={props.match.params.folderName}
                 />
-              <Route exact path="/:school/:course/:folderName/upload"
-                render={(props) => 
-                  <UploadNote
-                    school={props.match.params.school}
-                    course={props.match.params.course}
-                    folderName={props.match.params.folderName} />}
+              }
               />
-              {/* <Route path="/:school/:course/:folder" component={}/> */}
-              {/* <Route path="/user/admin" component={}/> */}
-              {/* <Route path="/user/notes" component={}/> */}
-              {/* <Route path="/profile" component={Profile}/> */}
-              <div>Signed In!</div>
-              <SignOut />
-              {/* <ContentGrouping path={''} name={'users'}></ContentGrouping> */}
-            </div>
-          </>
-          }
-        </Router>
-      </div>
+            <Route exact path="/:school/:course/:folderName/upload"
+              render={(props) => 
+                <UploadNote
+                  school={props.match.params.school}
+                  course={props.match.params.course}
+                  folderName={props.match.params.folderName} />}
+            />
+            {/* <Route path="/:school/:course/:folder" component={}/> */}
+            {/* <Route path="/user/admin" component={}/> */}
+            {/* <Route path="/user/notes" component={}/> */}
+            {/* <Route path="/profile" component={Profile}/> */}
+            <div>Signed In!</div>
+          </div>
+          :
+          <div id='main-content'>
+            <div id="welcome">Welcome to Note Global</div>
+            <div id="signInPrompt">Please sign in to continue!</div>
+            <StyledFirebaseAuth
+              uiConfig={this.uiConfig}
+              firebaseAuth={firebase.auth()} />
+          </div>
+        }
+      </Router>
     );
   };
 }

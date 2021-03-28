@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/NavBar.css';
 
+import SignOut from './SignOut';
+import { isSignedIn } from './localStorageFunctions';
 
 class NavBar extends Component {
     render() {
@@ -13,6 +15,7 @@ class NavBar extends Component {
                 <Link to="/user/notes">Uploaded Notes</Link>
                 <Link to="/upload">Upload</Link>
                 <Link to="/profile">Profile</Link>
+                {isSignedIn() && <SignOut />}
             </div>
         );
     }

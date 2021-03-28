@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import database from '../database';
-import { isSignedIn } from './localStorageFunctions';
 
 import { Link, useRouteMatch, useParams } from "react-router-dom";
 import NotePost from './NotePost';
@@ -37,8 +36,8 @@ function ContentGrouping(props) {
           numPosts.current += 1;
         // }
       })
+      setList(newList);
     })
-    setList(newList);
   }, [])
 
   const UploadFile = () => {

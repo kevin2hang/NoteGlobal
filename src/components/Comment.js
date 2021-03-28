@@ -97,9 +97,9 @@ class Comment extends React.Component {
         {this.state.showReplyInput ?
           <div>
             <input className='reply-input' value={this.state.value} onChange={this.handleChange} />
-            <button className onClick={this.addReplyComment}>Reply</button>
+            <button className='btn btn-secondary' onClick={this.addReplyComment}>Reply</button>
           </div>
-          : <button className='show-reply-button' onClick={this.toggleReplyInput}>Reply</button>}
+          : <button className='show-reply-button btn btn-secondary' onClick={this.toggleReplyInput}>Reply</button>}
       </div>
     );
   }

@@ -1,11 +1,18 @@
 .comment {
   width: 80%;
   height: fit-content;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
+
+  padding-left: 5px;
+  margin-top: 20px;
+
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .time-display {
@@ -19,6 +26,10 @@
 .reply-comment {
   margin-left: 10%;
   width: 70%;
+}
+
+.reply-input {
+  width: 50%;
 }
 
 .comment {

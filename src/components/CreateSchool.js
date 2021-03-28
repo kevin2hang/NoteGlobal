@@ -20,6 +20,17 @@ class CreateSchool extends Component {
         console.log(this.state.school);
         if (!this.schoolExists(this.state.school)) {
             database.ref('schools/' + this.state.school + '/').push("example-course");
+            database.ref('gen/' + this.state.school + '/').set({
+                'alternate-names': {},
+                courses: {
+                    'example-course': {
+                        'alternate-names' : 'ex-course',
+                        'notes': {},
+                        'verifiedAdmins': { '0': '02347407531' },
+                        'requestAdminPrivilegeUsers': { '1': '835698735' }
+                    },
+                }
+            })
             this.props.readSchools();
         }
     };
@@ -37,7 +48,7 @@ class CreateSchool extends Component {
         return (
             <div>
                 <form onSubmit={this.submit}>
-                    Create a School: 
+                    Create a School:
                     <input type="text" placeholder="School Name" onChange={this.handleChange} />
                     <input type="submit" />
                 </form>

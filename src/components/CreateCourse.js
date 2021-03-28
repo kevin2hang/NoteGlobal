@@ -24,18 +24,30 @@ class CreateCourse extends Component {
 
     submit = (e) => {
         e.preventDefault();
-        // if (!schoolExists(this.state.school)) {
-        database.ref('schools/' + this.state.school + '/').push(this.state.course)
-        // }
-        // else {
 
-        // }
+        database.ref('schools/' + this.state.school + '/').push(this.state.course)
+     
         database.ref('gen/' + this.state.school + '/courses/' + this.state.course + '/').set({
             'alternate-names': {},
             'notes': {},
             'verifiedAdmins': { '0': '02347407531' },
             'requestAdminPrivilegeUsers': { '1': '835698735' }
         })
+
+        let key = undefined;
+        database.ref('schools/' + this.state.school + '/').on("value", snapshot => {
+            snapshot.forEach(course => {
+                console.log(course.val())
+                if (course.val() == 'example-course')
+                    key = course.key;
+            })
+        })
+
+        if (key != undefined) {
+            database.ref('schools/' + this.state.school + '/' + key + '/').remove();
+            console.log('deleting example course from schools/'+ this.state.school + '/' + key + '/');
+        }
+        database.ref('gen/' + this.state.school + '/courses/example-course/').remove();
     };
 
 

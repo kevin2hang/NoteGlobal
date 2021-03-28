@@ -15,7 +15,7 @@ class Comment extends React.Component {
       showReplyInput: false,
       replyContent: '',
       replies: [],
-      flagged: this.props.flagged,
+      flagged: this.props.flagged !== undefined ? this.props.flagged : false
     }
   }
 
@@ -40,6 +40,7 @@ class Comment extends React.Component {
               postDate: replyComment.val().dateDay,
               postTime: replyComment.val().dateTime,
               googleId: replyComment.val().googleId,
+              flagged: replyComment.val().flagged,
               dbPath: this.dbPath + 'childComments/',
               dbKey: replyComment.key,
             }
@@ -53,10 +54,10 @@ class Comment extends React.Component {
   addReplyComment = () => {
     let replyComment = {
       content: this.state.replyContent,
-      googleId: getGoogleId,
-      email: getEmail,
-      dateDay: new Date.toLocaleDateString(),
-      dateTime: new Date.toLocaleTimeString()
+      googleId: getGoogleId(),
+      email: getEmail(),
+      dateDay: new Date().toLocaleDateString(),
+      dateTime: new Date().toLocaleTimeString()
     };
     database.ref(this.dbPath + 'childComments/').push(replyComment);
     this.setState({
@@ -83,14 +84,16 @@ class Comment extends React.Component {
       <div className='comment-block'>
         <div className='parent-comment comment'>
           <span>{this.props.content}</span>
-          <span className='time-display'>{this.props.dateDay} - {this.props.dateTime}</span>
-          <div className='flag-button' onClick={this.handleFlag}>
-            {this.state.flagged ? <FlagIcon/> : <FlagOutlinedIcon/>}
+          <div className='right'>
+            <span className='time-display'>{this.props.dateDay} - {this.props.dateTime}</span>
+            <div className='flag-button' onClick={this.handleFlag}>
+              {this.state.flagged ? <FlagIcon/> : <FlagOutlinedIcon/>}
+            </div>
           </div>
         </div>
         {this.state.replies.map((reply) => <ReplyComment {...reply} />)}
 
-        <div className='show-reply-button' onClick={this.toggleReplyInput}>Reply</div>
+        <button className='show-reply-button' onClick={this.toggleReplyInput}>Reply</button>
         {this.state.showReplyInput ?
           <div>
             <input className='reply-input' value={this.state.value} onChange={this.handleChange} />

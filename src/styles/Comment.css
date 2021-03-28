@@ -1,23 +1,24 @@
-.comment-block {
-  width: 100%;
+.comment {
+  width: 80%;
   height: fit-content;
   overflow-y: scroll;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: flex-start;
   flex-direction: column;
 }
 
 .time-display {
-  align-self: flex-end;
+  margin-left: 5%;
 }
 
 .parent-comment {
-  width: 100%
+  width: 80%
 }
 
 .reply-comment {
-  margin-left: 15%;
-  width: 85%;
+  margin-left: 10%;
+  width: 70%;
 }
 
 .comment {
@@ -25,12 +26,18 @@
   flex-direction: row;
 }
 
-.flag {
-  background-color: gray;
-  width: 20px;
-  height: 50px;
+.flag-button {
+  margin-left: 2%;
 }
 
-.flag:hover {
-  background-color: red;
+.right {
+  display: inline-flex;
+  justify-content: flex-end;
+  align-self: flex-start;
+}
+
+.show-reply-button {
+  margin-left: 5%;
+  opacity: 80%;
+  font-size: 0.8rem;
 }

@@ -133,9 +133,14 @@ class NotePost extends Component {
             newAvgRating = (oldRatingSum + value) / (10 * numRatings);
         }
         database.ref(this.dbPath + '/ratings/' + googleId + '/').set(value);
-
         this.setState({
-            rating: newAvgRating
+            rating: value
+        })
+    }
+
+    onChange = (event, value) => {
+        this.setState({
+            rating: value
         })
     }
 
@@ -210,8 +215,10 @@ class NotePost extends Component {
                             max={10}
                             marks
                             valueLabelDisplay="auto"
-                            onChangeCommitted={this.onChangeCommitted} style={{ maxWidth: "200px" }}
-                            defaultValue={this.state.rating}
+                            onChange={this.onChange}
+                            onChangeCommitted={this.onChangeCommitted} 
+                            style={{ maxWidth: "200px" }}
+                            value={this.state.rating}
                         />
                         <div style={{ display: "flex" }}>
                             <IconButton onClick={this.handleFlag}>

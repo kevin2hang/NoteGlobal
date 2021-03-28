@@ -11,6 +11,11 @@ Through NoteGlobal, we hope to help to foster a more engaging and supportive env
 	<li> Flagging posts/comments for going against academic dishonesty policies</li>
 </ul>
 
+## Images
+![NoteGlobalIcon](https://user-images.githubusercontent.com/56693266/112754046-39ef2000-8f8f-11eb-833a-0e9c27275a9c.png)
+![NoteGlobalSearchCourses](https://user-images.githubusercontent.com/56693266/112754071-512e0d80-8f8f-11eb-819a-4fba2c583fba.jpg)
+![NoteGlobalCourseNotes](https://user-images.githubusercontent.com/56693266/112754079-5be8a280-8f8f-11eb-8dab-f8da4ad5c1a7.jpg)
+
 ## How we built it
 Our team decided to use **React.js** for the frontend and **Firebase** for the backend, with **Google Realtime Database** as our data store. We sought an architecture that would be simple to maintain, efficient to create, and responsive to real time changes.
 

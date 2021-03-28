@@ -60,14 +60,19 @@ class UploadNote extends Component{
     render() {
         return(
             <>
-                <div>
+                {!this.state.encodedFile ?
+                (<div>
                     <input type="file" accept="application/pdf" onChange={this.handleChange} />
                     <button onClick={this.handleUpload}>
                         Upload!
                     </button>
-                </div>
-                {this.state.encodedFile && (    
-                <NotePost url={this.state.encodedFile} title={this.state.fileName} posted={new Date(Date.now())} rating={0}/>)}
+                </div>)
+                :
+                (    
+                <div style={{marginLeft: "100px", marginTop: "300px", width: "100vw"}}>
+                    <NotePost url={this.state.encodedFile} title={this.state.fileName} posted={new Date(Date.now())} rating={0}/>
+                </div>)
+                }
             </>
         )
     }

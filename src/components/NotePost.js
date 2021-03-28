@@ -51,7 +51,7 @@ class NotePost extends Component{
     render() {
         return(
             <>
-                <Grid container spacing={2}>
+                <Grid container spacing={8}>
                     <Grid item xs={5}>
                         <div style={{display: "flex"}}>
                             <IconButton onClick={this.handleLeft} disabled={this.state.pageNumber <= 1}>
@@ -67,7 +67,7 @@ class NotePost extends Component{
                             file={this.props.url}
                             onLoadSuccess={this.onDocumentLoadSuccess}
                         >
-                            <Page pageNumber={this.state.pageNumber} height={700} className="viewer"/>
+                            <Page pageNumber={this.state.pageNumber} height={650} className="viewer"/>
                         </Document>
                     </Grid>
                     <Grid item xs={7}>

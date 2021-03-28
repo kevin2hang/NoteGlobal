@@ -112,7 +112,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <UploadNote/>
         <Router>
           {!this.state.signedIn &&
             <div id='main-content'>
@@ -125,9 +124,11 @@ class App extends Component {
           }
           <NavBar/>
           {this.state.signedIn &&
+          <>
             <div id='main-content'>
-              <Route path="/" component={SearchCourses}/>
+              <Route exact path="/" component={SearchCourses}/>
               <Route path="/:school/:course" component={Course}/>
+              <Route exact path="/upload" component={UploadNote}/>
               {/* <Route path="/:school/:course/:folder" component={}/> */}
               {/* <Route path="/user/admin" component={}/> */}
               {/* <Route path="/user/notes" component={}/> */}
@@ -136,6 +137,7 @@ class App extends Component {
               <SignOut />
               <ContentGrouping path={''} name={'users'}></ContentGrouping>
             </div>
+          </>
           }
         </Router>
       </div>

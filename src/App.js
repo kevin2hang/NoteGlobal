@@ -127,7 +127,14 @@ class App extends Component {
           <>
             <div id='main-content'>
               <Route exact path="/" component={SearchCourses}/>
-              <Route path="/:school/:course" component={Course}/>
+              <Route exact path="/:school/:course" component={Course}/>
+              <Route path='/:school/:course/:folderName'
+                render={
+                  (props)=> <ContentGrouping path={`gen/${props.match.params.school}/courses/${props.match.params.course}/notes/`}
+                  name={props.match.params.folderName}
+                  />
+                }
+                />
               <Route exact path="/upload" component={UploadNote}/>
               {/* <Route path="/:school/:course/:folder" component={}/> */}
               {/* <Route path="/user/admin" component={}/> */}
@@ -135,7 +142,7 @@ class App extends Component {
               {/* <Route path="/profile" component={Profile}/> */}
               <div>Signed In!</div>
               <SignOut />
-              <ContentGrouping path={''} name={'users'}></ContentGrouping>
+              {/* <ContentGrouping path={''} name={'users'}></ContentGrouping> */}
             </div>
           </>
           }

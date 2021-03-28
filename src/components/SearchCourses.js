@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import CreateSchool from './CreateSchool';
 import CreateCourse from './CreateCourse';
 
+import '../styles/SearchCourses.css';
+
 class SearchCourses extends Component {
     constructor(props) {
         super(props);
@@ -15,10 +17,18 @@ class SearchCourses extends Component {
             schools: [],
             courses: []
         }
+
+        // this.readSchools()
     }
 
-    componentDidMount = () => {
-        this.readSchools();
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if (prevState.schools.length != this.state.schools.length) {
+    //         this.readSchools();
+    //     }
+    // }
+
+    componentDidMount() {
+        this.readSchools()
     }
 
     readSchools = () => {
@@ -32,7 +42,7 @@ class SearchCourses extends Component {
                         school: school.key 
                     });
                 }
-                if (!this.schoolsContains(school.key))
+                // if (!this.schoolsContains(school.key))
                     newSchools.push(school.key);
                 i++;
             })
@@ -63,11 +73,10 @@ class SearchCourses extends Component {
                 newCourses.push(course.val());
                 i++;
             })
+            this.setState({
+                courses: newCourses
+            })
         });
-
-        this.setState({
-            courses: newCourses
-        })
     }
 
     handleSchoolChange = (e) => {
@@ -84,7 +93,7 @@ class SearchCourses extends Component {
 
     schoolSubmit = (e) => {
         e.preventDefault();
-        console.log(e);
+        // console.log(e);
 
         this.readCourses(this.state.school);
 
@@ -132,7 +141,7 @@ class SearchCourses extends Component {
                                     return <option value={school}>{school}</option>
                                 })}
                             </select>
-                            <input type="submit" value="Submit" />
+                            <input className="submitBtn" type="submit" value="Submit" />
                         </form>
 
                         <CreateSchool readSchools={this.readSchools} />
@@ -150,7 +159,7 @@ class SearchCourses extends Component {
                                     return <option value={course}>{course}</option>
                                 })}
                             </select>
-                            <input type="submit" value="Submit" />
+                            <input className="submitBtn" type="submit" value="Submit" />
                         </form>
 
                         <CreateCourse />

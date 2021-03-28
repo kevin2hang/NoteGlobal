@@ -50,7 +50,7 @@ class NotePost extends Component {
         database.ref(this.dbPath +'/ratings/').on("value", snapshot => {
             snapshot.forEach(rating => {
                 if (rating.key == googleId) {
-                    this.setState({rating : rating.key});
+                    this.setState({rating : rating.val()});
                     return; // break out of anonymous function
                 }
             })
@@ -240,10 +240,10 @@ class NotePost extends Component {
                         )}
                         {this.state.showAddComment ? 
                             <>
-                            <input className='add-comment-form' value={this.state.commentVal} onChange={this.handleText}/>
-                            <button className='add-comment-btn' onClick={this.addComment}>Add Comment</button>
+                            <input className='add-comment-form reply-input' value={this.state.commentVal} onChange={this.handleText}/>
+                            <button className='add-comment-btn btn btn-success' onClick={this.addComment}>Add Comment</button>
                             </>
-                        : <button className='show-add-comment-btn' onClick={this.toggleShowAddComment}>Add Comment</button>
+                        : <button className='show-add-comment-btn btn btn-success' onClick={this.toggleShowAddComment}>Add Comment</button>
                         }
                     </Grid>
                 </Grid>

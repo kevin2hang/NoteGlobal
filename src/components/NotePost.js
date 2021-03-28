@@ -133,9 +133,6 @@ class NotePost extends Component {
             newAvgRating = (oldRatingSum + value) / (10 * numRatings);
         }
         database.ref(this.dbPath + '/ratings/' + googleId + '/').set(value);
-        this.setState({
-            rating: value
-        })
     }
 
     onChange = (event, value) => {

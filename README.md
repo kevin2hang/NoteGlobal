@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+## Inspiration
+In this period of remote learning, we as students have found it far more difficult to find the traditional __“student-teacher”__ dynamic of lowerclassmen seeking the academic wisdom and experience of upperclassmen. Our goal for Note Global was to provide a platform that can help reinvigorate this lost relationship. Through our platform, upperclassmen are able to transfer their knowledge by sharing their notes for courses they have taken. Lowerclassmen are able to draw from a vast pool of passed down knowledge, acquiring help that they may not be able to get otherwise. As freshmen, we understand the anxiety that comes with going to a new school, and so we offer the option for anonymity as to help students who may be shy. As students and our platform grows, with time we hope to surpass the virtual barriers that separate us and create a strong and interconnected community of life-long learners. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What it does
+Through NoteGlobal, we hope to help to foster a more engaging and supportive environment for collaborative learning during these challenging times. Our platform offers the following features to promote an environment for collaboration and learning:
+<ul>
+	<li> Note uploads for quick and efficient storage of knowledge" </li>
+	<li> Note posts with a comment section for discussion of content and material</li>
+	<li> Note ratings for distinction of superb notes</li>
+	<li> Cataloging hierarchy catered towards university communities and specific courses </li>
+	<li> Flagging posts/comments for going against academic dishonesty policies</li>
+</ul>
 
-## Available Scripts
+## How we built it
+Our team decided to use **React.js** for the frontend and **Firebase** for the backend, with **Google Realtime Database** as our data store. We sought an architecture that would be simple to maintain, efficient to create, and responsive to real time changes.
 
-In the project directory, you can run:
+## Challenges we ran into
+<ul>
+<li>Dynamic page generation</li>
+<li>Dealing with a large/nested database</li>
+<li>Asynchronous callback functions</li>
+</ul>
 
-### `npm start`
+## Accomplishments that we're proud of
+<ul>
+<li>Mobile friendly!</li>
+<li>Serverless Architecture</li>
+</ul>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## What we learned
+<ul>
+<li>Working with non-relational databases</li>
+<li>Routing</li>
+<li>Base64 Data Compression and Storage Methods</li>
+</ul>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## What's next for Note Global
+Our team is proud of what we’ve managed to create in such a short time, but our vision expands far beyond what we have down in code. In our brainstorming, we were ambitious in our idea-making, but realistic in prioritizing the core functionality of our app. The ideas we discarded, however, are not lost, but are now our goals for the future: 
+<ul>
+<li>More robust user accounts and social features</li>
+<li>Expansion to more universities</li>
+<li>Improved PDF viewer and user interface</li>
+<li>Support for more files like images, google slides, word docs, etc.</li>
+<li>Shared notes for video links</li>
+<li>Watch synchronized embedded videos (HTML5 player) in groups for real-time study sessions</li>
+<li>Move from one-page web app to server side rendered for search optimization</li>
+</ul>

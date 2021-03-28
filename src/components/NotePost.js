@@ -167,8 +167,7 @@ class NotePost extends Component {
             content: this.state.commentVal,
             googleId: getGoogleId(),
             email: getEmail(),
-            dateDay: new Date().toLocaleDateString(),
-            dateTime: new Date().toLocaleTimeString(),
+            postTimeMs: Date.now(),
             flagged: false,
             childComments: {}
         };
@@ -230,8 +229,8 @@ class NotePost extends Component {
                                     content={commentObj.val().content}
                                     path={this.dbPath + '/comments/'}
                                     dbKey={commentObj.key}
-                                    dateDay={commentObj.val().dateDay}
-                                    dateTime={commentObj.val().dateTime}
+                                    dateDay={new Date(commentObj.val().postTimeMs).toLocaleDateString()}
+                                    dateTime={new Date(commentObj.val().postTimeMs).toLocaleTimeString()}
                                     flagged={commentObj.val().flagged}
                                 />
                             )}

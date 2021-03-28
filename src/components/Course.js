@@ -51,8 +51,7 @@ const Course = (props) => {
     const contentGroupingObj = {
       'googleId': getGoogleId(),
       'email': getEmail(),
-      dateDay: new Date().toLocaleDateString(),
-      dateTime: new Date().toLocaleTimeString(),
+      postTimeMs: Date.now()
     };
     database.ref(dbPath+newContentGrouping+'/').set(contentGroupingObj);
     setNewContentGrouping('');

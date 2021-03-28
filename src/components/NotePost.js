@@ -9,6 +9,7 @@ import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import '../styles/Viewer.css';
 import database from '../database';
 import { getGoogleId } from './localStorageFunctions';
+import '../styles/Note.css';
 
 class NotePost extends Component {
 
@@ -84,7 +85,7 @@ class NotePost extends Component {
         let googleId = getGoogleId();
 
         if (ratedB4) {
-            let oldRating;
+            let oldRating = 0;
             // read
             database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/ratings/' + googleId + '/').on("value", snapshot => {
                 oldRating = snapshot.val();
@@ -115,15 +116,16 @@ class NotePost extends Component {
 
     userRatedBefore = () => {
         let googleId = getGoogleId();
+        let found = false;
         database.ref('gen/' + this.props.school + '/courses/' + this.props.course + '/notes/' + this.props.folderName + '/notes/' + this.props.dbKey + '/ratings/').on("value", snapshot => {
             snapshot.forEach(rating => {
                 if (rating.key == googleId) {
-                    return true;
+                    found = true;
                 }
             })
         })
 
-        return false;
+        return found;
     }
 
     render() {

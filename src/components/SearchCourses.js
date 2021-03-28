@@ -32,7 +32,7 @@ class SearchCourses extends Component {
     }
 
     readSchools = () => {
-        let newSchools = [];
+        let newSchools = this.state.schools;
         database.ref('schools/').on("value", (snapshot) => {
             let i = 0;
             snapshot.forEach(school => {
@@ -41,7 +41,7 @@ class SearchCourses extends Component {
                         school: school.key 
                     });
                 }
-                // if (!this.schoolsContains(school.key))
+                if (!this.schoolsContains(school.key))
                     newSchools.push(school.key);
                 i++;
             })
@@ -61,20 +61,29 @@ class SearchCourses extends Component {
         if (school == '')
             return;
 
-        let newCourses = [];
+        let newCourses = this.state.courses;
         database.ref('schools/' + school + '/').on("value", (snapshot) => {
             let i = 0;
             snapshot.forEach(course => {
                 if (i == 0) {
                     this.setState({ course: course.val() })
                 }
-                newCourses.push(course.val());
+                if (!this.coursesContains(course.val()))
+                    newCourses.push(course.val());
                 i++;
             })
             this.setState({
                 courses: newCourses
             })
         });
+    }
+
+    coursesContains = (course) => {
+        for (let i = 0; i < this.state.courses.length; i++) {
+            if (course == this.state.courses[i])
+                return true;
+        }
+        return false;
     }
 
     handleSchoolChange = (e) => {
@@ -109,13 +118,12 @@ class SearchCourses extends Component {
 
     moveBack = () => {
         if (this.state.waitingFor == 'nothing') {
-            this.readCourses(this.state.school);
             this.setState({
                 waitingFor: 'course'
             });
+            this.readCourses(this.state.school);
         }
         else if (this.state.waitingFor == 'course') {
-
             this.setState({
                 waitingFor: 'school',
             });

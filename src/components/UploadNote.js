@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NotePost from './NotePost'
+import database from '../database';
+import { isSignedIn, getGoogleId, getEmail } from './localStorageFunctions';
 
 class UploadNote extends Component{
     
@@ -11,7 +13,8 @@ class UploadNote extends Component{
             encodedFile: null,
             fileNameL: null,
             numPages: null,
-            pageNumber: 1
+            pageNumber: 1,
+            signedIn: isSignedIn,
         }
     }
 
@@ -44,6 +47,19 @@ class UploadNote extends Component{
 
                 // TODO: Create new entry for document in DB
                 // TODO: Upload base64 encoding as document's URL to DB
+                const dbPath = 'gen/'+this.props.school+'/courses/'+this.props.course+'/notes/'+this.props.folderName+'/';
+                const postObj = {
+                    'fileUrl': encodedFile,
+                    'filename': filename,
+                    'ratingSum': 0,
+                    'numRating': 0,
+                    'ratings': {},
+                    'comments': {},
+                    'googleId': getGoogleId(),
+                    'email': getEmail(),
+                    'flagged': false,
+                };
+                database.ref(dbPath).push(postObj);
 
             };
             // Convert data to base64
@@ -60,6 +76,8 @@ class UploadNote extends Component{
     render() {
         return(
             <>
+            {this.state.signedIn() ? 
+            <>
                 {!this.state.encodedFile ?
                 (<div>
                     <input type="file" accept="application/pdf" onChange={this.handleChange} />
@@ -73,6 +91,10 @@ class UploadNote extends Component{
                     <NotePost url={this.state.encodedFile} title={this.state.fileName} posted={new Date(Date.now())} rating={0}/>
                 </div>)
                 }
+            </>
+            :
+            <div>You must be signed in to upload your notes. If you have signed in, please reload the page.</div>
+            }
             </>
         )
     }

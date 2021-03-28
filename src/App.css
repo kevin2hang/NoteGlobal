@@ -1,3 +1,32 @@
+html {
+  font-size: 100%;
+}
+@media (max-width: 1310px) {
+  html {
+      font-size: 85%;
+  }
+}
+@media (max-width: 1160px) {
+  html {
+      font-size: 75%;
+  }
+}
+@media (max-width: 1050px) {
+  html {
+      font-size: 70%;
+  }
+}
+@media (max-width: 768px) {
+  html {
+      font-size: 65%;
+  }
+}
+@media (max-width: 600px) {
+  html {
+      font-size: 60%;
+  }
+} 
+
 a, a:visited{
   text-decoration: none;
 }

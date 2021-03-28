@@ -38,8 +38,8 @@ class Comment extends React.Component {
           newReplies.push(
             {
               content: replyComment.val().content,
-              postDate: replyComment.val().dateDay,
-              postTime: replyComment.val().dateTime,
+              dateDay: replyComment.val().dateDay,
+              dateTime: replyComment.val().dateTime,
               googleId: replyComment.val().googleId,
               flagged: replyComment.val().flagged,
               dbPath: this.dbPath + 'childComments/',
@@ -53,6 +53,9 @@ class Comment extends React.Component {
   }
 
   addReplyComment = () => {
+    if (this.state.replyContent === '' || this.state.replyContent.trim() === '') {
+      return;
+    }
     let replyComment = {
       content: this.state.replyContent,
       googleId: getGoogleId(),
@@ -86,7 +89,7 @@ class Comment extends React.Component {
         <div className='parent-comment comment'>
           <span>{this.props.content}</span>
           <div className='right'>
-            <span className='time-display'>{this.props.dateDay} - {this.props.dateTime}</span>
+            <span className='time-display'>{this.props.dateDay} - {this.props.dateTime.substring(0,this.props.dateTime.length-6) + this.props.dateTime.substring(this.props.dateTime.length-3)}</span>
             <div className='flag-button' onClick={this.handleFlag}>
               {this.state.flagged ? <FlagIcon/> : <FlagOutlinedIcon/>}
             </div>

@@ -42,8 +42,17 @@ class NotePost extends Component {
         // TODO: Grab comments array
         database.ref(this.dbPath + '/').on("value", snapshot => {
             this.setState({
-                flagged: snapshot.flagged,
-                rating: snapshot.ratingSum / (snapshot.numRatings * 10),
+                flagged: snapshot.flagged !== undefined ? snapshot.flagged : false,
+            })
+        })
+
+        let googleId = getGoogleId();
+        database.ref(this.dbPath +'/ratings/').on("value", snapshot => {
+            snapshot.forEach(rating => {
+                if (rating.key == googleId) {
+                    this.setState({rating : rating.key});
+                    return; // break out of anonymous function
+                }
             })
         })
 
@@ -76,6 +85,8 @@ class NotePost extends Component {
     handleFlag = () => {
         this.setState({ flagged: !this.state.flagged })
         // TODO: Change user flag status in DB
+        console.log(this.dbPath)
+        console.log(this.state.flagged)
         database.ref(this.dbPath + '/').update({
             flagged: this.state.flagged
         })
@@ -208,7 +219,7 @@ class NotePost extends Component {
                             </IconButton>
                             <p> Flag for Cheating</p>
                         </div>
-                        <p> Comments </p>
+                        <p> <h6>Comments </h6></p>
                         {/* TODO: Add Comments */}
                         {this.state.comments.map((commentObj) =>
                             <Comment

@@ -134,8 +134,8 @@ class SearchCourses extends Component {
 
     render() {
         return (
-            <div className='centered'>
-                <img src={Logo}/>
+            <div className='search-courses'>
+                <img className='logo' src={Logo}/>
                 <h1>Note Global</h1>
                 {this.state.waitingFor == 'school' &&
                     <div className="dropdownForm">

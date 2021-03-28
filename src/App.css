@@ -68,8 +68,15 @@ a:visited {
   font-weight : 600;
 }
 
-.centered {
+.search-courses {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 700px;
+  max-width: 90%;
+}
+
+.logo {
+  width: 70%;
 }

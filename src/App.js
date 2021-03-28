@@ -17,6 +17,8 @@ import Course from './components/Course'
 import ContentGrouping from './components/ContentGrouping';
 import UploadNote from './components/UploadNote'
 
+import Logo from './assets/logo512.png';
+
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -131,6 +133,10 @@ class App extends Component {
           </div>
           :
           <div id='main-content'>
+            <div className='search-courses'>
+              <img className='logo' src={Logo}/>
+              <h1>Note Global</h1>
+            </div>
             <div id="welcome">Welcome to Note Global</div>
             <div id="signInPrompt">Please sign in to continue!</div>
             <StyledFirebaseAuth

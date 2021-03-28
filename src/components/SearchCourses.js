@@ -36,7 +36,6 @@ class SearchCourses extends Component {
         database.ref('schools/').on("value", (snapshot) => {
             let i = 0;
             snapshot.forEach(school => {
-                console.log(`${i}: ${school.key}`)
                 if (i == 0) {
                     this.setState({ 
                         school: school.key 
@@ -69,7 +68,6 @@ class SearchCourses extends Component {
                 if (i == 0) {
                     this.setState({ course: course.val() })
                 }
-                console.log(course.val())
                 newCourses.push(course.val());
                 i++;
             })
@@ -93,7 +91,6 @@ class SearchCourses extends Component {
 
     schoolSubmit = (e) => {
         e.preventDefault();
-        // console.log(e);
 
         this.readCourses(this.state.school);
 
@@ -128,20 +125,19 @@ class SearchCourses extends Component {
     render() {
         return (
             <div>
-                <button id="backBtn" onClick={this.moveBack}>Back</button>
+                <button id="backBtn" className="btn btn-secondary" onClick={this.moveBack}>Back</button>
                 {this.state.waitingFor == 'school' &&
                     <div className="dropdownForm">
 
                         <form onSubmit={this.schoolSubmit}>
-                            <label>Choose a school (or create one if your's isn't there): </label>
+                            <label>Choose a school (or create one if yours isn't there): </label>
 
-                            {console.log(this.state.school)}
                             <select value={this.state.school} id="schoolSelector" onChange={this.handleSchoolChange} value={this.state.school}>
                                 {this.state.schools.map(school => {
                                     return <option value={school}>{school}</option>
                                 })}
                             </select>
-                            <input className="submitBtn" type="submit" value="Submit" />
+                            <input className="submitBtn btn btn-primary" type="submit" value="Submit" />
                         </form>
 
                         <CreateSchool readSchools={this.readSchools} />
@@ -159,7 +155,7 @@ class SearchCourses extends Component {
                                     return <option value={course}>{course}</option>
                                 })}
                             </select>
-                            <input className="submitBtn" type="submit" value="Submit" />
+                            <input className="submitBtn btn btn-primary" type="submit" value="Submit" />
                         </form>
 
                         <CreateCourse />

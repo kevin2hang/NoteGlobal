@@ -51,7 +51,6 @@ class CreateCourse extends Component {
         let key = undefined;
         database.ref('schools/' + this.state.school + '/').on("value", snapshot => {
             snapshot.forEach(course => {
-                console.log(course.val())
                 if (course.val() == 'example-course')
                     key = course.key;
             })
@@ -59,7 +58,6 @@ class CreateCourse extends Component {
 
         if (key != undefined) {
             database.ref('schools/' + this.state.school + '/' + key + '/').remove();
-            console.log('deleting example course from schools/'+ this.state.school + '/' + key + '/');
         }
         database.ref('gen/' + this.state.school + '/courses/example-course/').remove();
 
@@ -73,12 +71,12 @@ class CreateCourse extends Component {
 
     render() {
         return (
-            <div>
+            <div className="create">
                 <form onSubmit={this.submit}>
                     Create a Course:
-                    <input type="text" placeholder="School Name" value={this.state.school} onChange={this.handleSchoolChange} />
-                    <input type="text" placeholder="Course name" value={this.state.course} onChange={this.handleCourseChange} />
-                    <input className='submitBtn' type="submit" />
+                    <input className="form-control" type="text" placeholder="School Name" value={this.state.school} onChange={this.handleSchoolChange} />
+                    <input className="form-control" type="text" placeholder="Course name" value={this.state.course} onChange={this.handleCourseChange} />
+                    <input className='submitBtn btn btn-primary' type="submit" />
                 </form>
             </div>
         )

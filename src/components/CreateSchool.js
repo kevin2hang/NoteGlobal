@@ -20,12 +20,10 @@ class CreateSchool extends Component {
 
     submit = (e) => {
         e.preventDefault();
-        // console.log(this.state.school);
 
         // trimming doesn't work
         let school = this.state.school;
         let trimmedSchool = school.trim();
-        // console.log(trimmedSchool);
         this.setState({
             school : trimmedSchool
         });
@@ -64,11 +62,11 @@ class CreateSchool extends Component {
 
     render() {
         return (
-            <div>
+            <div className="create">
                 <form onSubmit={this.submit}>
                     Create a School:
-                    <input type="text" placeholder="School Name" value={this.state.school} onChange={this.handleChange} />
-                    <input className='submitBtn' type="submit" />
+                    <input className="form-control" type="text" placeholder="School Name" value={this.state.school} onChange={this.handleChange} />
+                    <input className='submitBtn btn btn-primary' type="submit" />
                 </form>
             </div>
         )

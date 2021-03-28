@@ -185,14 +185,14 @@ class NotePost extends Component {
             <>
                 <Grid container spacing={4}>
                     <Grid item lg={5} xs={12}>
-                        <div style={{ display: "flex" }}>
+                        <div style={{ display: "flex", alignItems: 'center' }}>
                             <IconButton onClick={this.handleLeft} disabled={this.state.pageNumber <= 1}>
                                 <ChevronLeftIcon />
                             </IconButton>
                             <IconButton onClick={this.handleRight} disabled={this.state.pageNumber >= this.state.numPages}>
                                 <ChevronRightIcon />
                             </IconButton>
-                            <p>Page {this.state.pageNumber} of {this.state.numPages}</p>
+                            <div>Page {this.state.pageNumber} of {this.state.numPages}</div>
 
                         </div>
                         <Document
@@ -204,8 +204,8 @@ class NotePost extends Component {
                     </Grid>
                     <Grid item lg={7} xs={12} style={{ width: '100%' }}>
                         <p> {this.props.title} </p>
-                        <p> Posted {this.props.posted.toLocaleDateString()} </p>
-                        <p> Average Rating: {this.props.rating.toFixed(2)} </p>
+                        <p> Posted: {this.props.posted.toLocaleDateString()} </p>
+                        <p> Average Rating: {this.props.rating.toFixed(2)} &#127775; </p>
                         <p> Rate This Note </p>
                         <Slider
                             min={0}
@@ -217,11 +217,11 @@ class NotePost extends Component {
                             style={{ maxWidth: "200px" }}
                             value={this.state.rating}
                         />
-                        <div style={{ display: "flex" }}>
+                        <div style={{ display: "flex", alignItems: 'center'}}>
                             <IconButton onClick={this.handleFlag}>
                                 {this.state.flagged ? <FlagIcon /> : <FlagOutlinedIcon />}
                             </IconButton>
-                            <p> Flag for Cheating</p>
+                            <div> Flag for Cheating</div>
                         </div>
                         <p> <h6>Comments </h6></p>
                         <div className='comments'>

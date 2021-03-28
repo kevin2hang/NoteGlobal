@@ -159,7 +159,7 @@ class SearchCourses extends Component {
                     <div className="dropdownForm">
                         <button id="backBtn" className="btn btn-secondary" onClick={this.moveBack}>Back</button>
                         <form onSubmit={this.courseSubmit}>
-                            <label>Choose a course (or create one if your's isn't there): </label>
+                            <label>Choose a course (or create one if yours isn't there): </label>
 
                             <select value={this.state.course} id="courseSelector" onChange={this.handleCourseChange} value={this.state.course}>
                                 {this.state.courses.map(course => {

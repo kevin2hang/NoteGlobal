@@ -48,6 +48,11 @@ function ContentGrouping(props) {
   return (
     <>
       <h3>{title}</h3>
+      <UploadNote
+        school={params.school}
+        course={params.course}
+        folderName={params.folderName} 
+      />
       <ul>
         {list}
       </ul>
@@ -56,11 +61,7 @@ function ContentGrouping(props) {
         :''
       }
       <div style={{paddingBottom: "70px"}}>
-        <UploadNote
-                  school={params.school}
-                  course={params.course}
-                  folderName={params.folderName} 
-          />
+        
       </div>
     </>
   )

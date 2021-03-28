@@ -85,7 +85,7 @@ class UploadNote extends Component{
                     </button>
                 </div>)
                 :
-                <div>Upload Successful!</div>
+                <div className="alert alert-success" role="alert">Upload Successful!</div>
                 }
             </>
             :

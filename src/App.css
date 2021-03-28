@@ -60,12 +60,7 @@ a:visited {
 }
 
 #signedInStatus {
-  position : fixed;
-  left : 2rem;
-  bottom : 2.5rem;
-  font-size : 2rem;
-  color : black;
-  font-weight : 600;
+  padding-left: 0.6rem;
 }
 
 .search-courses {
@@ -79,4 +74,20 @@ a:visited {
 
 .logo {
   width: 70%;
+}
+
+.toggle-show-signed-in:hover {
+  cursor: pointer;
+}
+
+.signed-in-display {
+  position : fixed;
+  left : 2rem;
+  bottom : 2.5rem;
+  font-size : 2rem;
+  color : black;
+  font-weight : 600;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }

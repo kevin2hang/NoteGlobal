@@ -80,8 +80,8 @@ class UploadNote extends Component{
             <>
                 {!this.state.encodedFile ?
                 (<div>
-                    <input type="file" accept="application/pdf" onChange={this.handleChange} />
-                    <button onClick={this.handleUpload}>
+                    <input className='form-control' type="file" accept="application/pdf" onChange={this.handleChange} />
+                    <button className='btn btn-primary' onClick={this.handleUpload}>
                         Upload!
                     </button>
                 </div>)

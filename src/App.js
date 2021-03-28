@@ -124,29 +124,29 @@ class App extends Component {
                   />
                 }
               />
-              <Route exact path="/:school/:course/:folderName/upload"
-                render={(props) =>
-                  <UploadNote
-                    school={props.match.params.school}
-                    course={props.match.params.course}
-                    folderName={props.match.params.folderName} />}
-              />
-              {/* <Route path="/:school/:course/:folder" component={}/> */}
-              {/* <Route path="/user/admin" component={}/> */}
-              {/* <Route path="/user/notes" component={}/> */}
-              {/* <Route path="/profile" component={Profile}/> */}
-            </div>
-            :
-            <div id='main-content'>
-              <div id="welcome">Welcome to Note Global</div>
-              <div id="signInPrompt">Please sign in to continue!</div>
-              <StyledFirebaseAuth
-                uiConfig={this.uiConfig}
-                firebaseAuth={firebase.auth()} />
-            </div>
-          }
-        </Router>
-        <div id="signedInStatus">Signed In &#9989;</div>
+            <Route exact path="/:school/:course/:folderName/upload"
+              render={(props) => 
+                <UploadNote
+                  school={props.match.params.school}
+                  course={props.match.params.course}
+                  folderName={props.match.params.folderName} />}
+            />
+            {/* <Route path="/:school/:course/:folder" component={}/> */}
+            {/* <Route path="/user/admin" component={}/> */}
+            {/* <Route path="/user/notes" component={}/> */}
+            {/* <Route path="/profile" component={Profile}/> */}
+          </div>
+          :
+          <div id='main-content'>
+            <div id="welcome">Welcome to Note Global</div>
+            <div id="signInPrompt">Please sign in to continue!</div>
+            <StyledFirebaseAuth
+              uiConfig={this.uiConfig}
+              firebaseAuth={firebase.auth()} />
+          </div>
+        }
+      </Router>
+      <div id="signedInStatus">Signed In &#9989;</div>
       </div>
     );
   };

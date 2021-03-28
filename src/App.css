@@ -32,9 +32,9 @@ a, a:visited{
   color: black;
 }
 
-/* a:visited {
+a:visited {
   color: inherit;
-} */
+}
 
 #navbar {
   width: 100%;
@@ -55,4 +55,13 @@ a, a:visited{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#signedInStatus {
+  position : fixed;
+  left : 2rem;
+  bottom : 2.5rem;
+  font-size : 2rem;
+  color : black;
+  font-weight : 600;
 }

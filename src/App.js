@@ -61,12 +61,12 @@ class App extends Component {
         });
 
         if (this.isNewUser(currUser)) {
-          database.ref('users/'+this.state.user.googleId+'/').set({
-            email : currUser.email,
-            displayName : currUser.displayName,
-            postedFiles : {},
-            superAdmin : false,
-            adminCourses : {}
+          database.ref('users/' + this.state.user.googleId + '/').set({
+            email: currUser.email,
+            displayName: currUser.displayName,
+            postedFiles: {},
+            superAdmin: false,
+            adminCourses: {}
           })
         }
       }
@@ -110,18 +110,19 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <NavBar/>
-        {this.state.signedIn ? 
-          <div id='main-content'>
-            <Route exact path="/" component={SearchCourses}/>
-            <Route exact path="/:school/:course" component={Course}/>
-            <Route exact path='/:school/:course/:folderName'
-              render={
-                (props)=> <ContentGrouping path={`gen/${props.match.params.school}/courses/${props.match.params.course}/notes/`}
-                name={props.match.params.folderName}
-                />
-              }
+      <div>
+        <Router>
+          <NavBar />
+          {this.state.signedIn ?
+            <div id='main-content'>
+              <Route exact path="/" component={SearchCourses} />
+              <Route exact path="/:school/:course" component={Course} />
+              <Route path='/:school/:course/:folderName'
+                render={
+                  (props) => <ContentGrouping path={`gen/${props.match.params.school}/courses/${props.match.params.course}/notes/`}
+                    name={props.match.params.folderName}
+                  />
+                }
               />
             <Route exact path="/:school/:course/:folderName/upload"
               render={(props) => 
@@ -145,6 +146,8 @@ class App extends Component {
           </div>
         }
       </Router>
+      <div id="signedInStatus">Signed In &#9989;</div>
+      </div>
     );
   };
 }

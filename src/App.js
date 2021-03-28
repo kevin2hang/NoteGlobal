@@ -124,13 +124,6 @@ class App extends Component {
                   />
                 }
               />
-            <Route exact path="/:school/:course/:folderName/upload"
-              render={(props) => 
-                <UploadNote
-                  school={props.match.params.school}
-                  course={props.match.params.course}
-                  folderName={props.match.params.folderName} />}
-            />
             {/* <Route path="/:school/:course/:folder" component={}/> */}
             {/* <Route path="/user/admin" component={}/> */}
             {/* <Route path="/user/notes" component={}/> */}

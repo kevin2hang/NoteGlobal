@@ -33,25 +33,22 @@ const Course = (props) => {
   }
   const updateFolders = () => {
     database.ref(dbPath).on("value", (contentGroupings) => {
+      const copyFolders = [];
       contentGroupings.forEach(contentGrouping => {
-        if (doesNotContain(contentGrouping.key)){
-          const copyFolders = folders;
-          copyFolders.push(
-          {
-            dbPath: dbPath,
-            folderName: contentGrouping.key,
-          });
-          setFolders(copyFolders)
-        }
+        copyFolders.push(
+        {
+          dbPath: dbPath,
+          folderName: contentGrouping.key,
+        });
       });
+      setFolders(copyFolders)
     })
   }
 
   const addContentGrouping = () => {
+    if (newContentGrouping === '' || newContentGrouping.trim() === '') return false;
     database.ref(dbPath).on("value", (contentGroupings) => {
       contentGroupings.forEach(contentGrouping => {
-        console.log('db key: '+contentGrouping.key);
-        console.log('to be added: ' +newContentGrouping);
         if (contentGrouping.key == newContentGrouping) {
            return false;
         }

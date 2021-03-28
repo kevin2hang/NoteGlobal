@@ -36,7 +36,6 @@ class SearchCourses extends Component {
         database.ref('schools/').on("value", (snapshot) => {
             let i = 0;
             snapshot.forEach(school => {
-                console.log(`${i}: ${school.key}`)
                 if (i == 0) {
                     this.setState({ 
                         school: school.key 
@@ -69,7 +68,6 @@ class SearchCourses extends Component {
                 if (i == 0) {
                     this.setState({ course: course.val() })
                 }
-                console.log(course.val())
                 newCourses.push(course.val());
                 i++;
             })
@@ -93,7 +91,6 @@ class SearchCourses extends Component {
 
     schoolSubmit = (e) => {
         e.preventDefault();
-        // console.log(e);
 
         this.readCourses(this.state.school);
 
@@ -135,7 +132,6 @@ class SearchCourses extends Component {
                         <form onSubmit={this.schoolSubmit}>
                             <label>Choose a school (or create one if your's isn't there): </label>
 
-                            {console.log(this.state.school)}
                             <select value={this.state.school} id="schoolSelector" onChange={this.handleSchoolChange} value={this.state.school}>
                                 {this.state.schools.map(school => {
                                     return <option value={school}>{school}</option>

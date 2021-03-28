@@ -20,12 +20,10 @@ class CreateSchool extends Component {
 
     submit = (e) => {
         e.preventDefault();
-        // console.log(this.state.school);
 
         // trimming doesn't work
         let school = this.state.school;
         let trimmedSchool = school.trim();
-        // console.log(trimmedSchool);
         this.setState({
             school : trimmedSchool
         });

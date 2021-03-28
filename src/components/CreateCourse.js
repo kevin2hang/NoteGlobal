@@ -51,7 +51,6 @@ class CreateCourse extends Component {
         let key = undefined;
         database.ref('schools/' + this.state.school + '/').on("value", snapshot => {
             snapshot.forEach(course => {
-                console.log(course.val())
                 if (course.val() == 'example-course')
                     key = course.key;
             })
@@ -59,7 +58,6 @@ class CreateCourse extends Component {
 
         if (key != undefined) {
             database.ref('schools/' + this.state.school + '/' + key + '/').remove();
-            console.log('deleting example course from schools/'+ this.state.school + '/' + key + '/');
         }
         database.ref('gen/' + this.state.school + '/courses/example-course/').remove();
 

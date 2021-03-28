@@ -42,7 +42,7 @@ class NotePost extends Component {
         // TODO: Grab comments array
         database.ref(this.dbPath + '/').on("value", snapshot => {
             this.setState({
-                flagged: snapshot.flagged,
+                flagged: snapshot.flagged !== undefined ? snapshot.flagged : false,
                 rating: snapshot.ratingSum / (snapshot.numRatings * 10),
             })
         })
@@ -76,6 +76,8 @@ class NotePost extends Component {
     handleFlag = () => {
         this.setState({ flagged: !this.state.flagged })
         // TODO: Change user flag status in DB
+        console.log(this.dbPath)
+        console.log(this.state.flagged)
         database.ref(this.dbPath + '/').update({
             flagged: this.state.flagged
         })
@@ -186,7 +188,7 @@ class NotePost extends Component {
                             file={this.props.url}
                             onLoadSuccess={this.onDocumentLoadSuccess}
                         >
-                            <Page pageNumber={this.state.pageNumber} height={650} width={window.innerWidth > 500 ? 0 : window.innerWidth*0.8} className="viewer" />
+                            <Page pageNumber={this.state.pageNumber} className="viewer" />
                         </Document>
                     </Grid>
                     <Grid item lg={7} xs={12} style={{width:'100%'}}>

@@ -139,7 +139,7 @@ class App extends Component {
           </div>
         }
       </Router>
-      <div id="signedInStatus">Signed In &#9989;</div>
+      {this.state.signedIn && <div id="signedInStatus">Signed In &#9989;</div>}
       </div>
     );
   };

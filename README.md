@@ -12,9 +12,11 @@ Through NoteGlobal, we hope to help to foster a more engaging and supportive env
 </ul>
 
 ## Images
-![NoteGlobalIcon](https://user-images.githubusercontent.com/56693266/112754046-39ef2000-8f8f-11eb-833a-0e9c27275a9c.png)
-![NoteGlobalSearchCourses](https://user-images.githubusercontent.com/56693266/112754071-512e0d80-8f8f-11eb-819a-4fba2c583fba.jpg)
-![NoteGlobalCourseNotes](https://user-images.githubusercontent.com/56693266/112754079-5be8a280-8f8f-11eb-8dab-f8da4ad5c1a7.jpg)
+<div style="display:flex; justify-content:space-around; flex-wrap:wrap;">
+	<img alt="Our original logo, made using vector art" src="https://user-images.githubusercontent.com/56693266/112754046-39ef2000-8f8f-11eb-833a-0e9c27275a9c.png" style="width: 400; margin: auto; margin-bottom: 10px; border-radius:35px;"/>
+	<img alt="Note Global Search Bar used for selecting or creating schools and courses" src="https://user-images.githubusercontent.com/56693266/112754071-512e0d80-8f8f-11eb-819a-4fba2c583fba.jpg" style="width: 400; margin: auto; margin-bottom: 10px; border-radius:35px;"/>
+	<img alt="Note Post Page where users can upload their notes and comment on others' notes" src="https://user-images.githubusercontent.com/56693266/112754079-5be8a280-8f8f-11eb-8dab-f8da4ad5c1a7.jpg" style="width: 400; margin: auto; margin-bottom: 10px; border-radius:35px;"/>
+</div>
 
 ## How we built it
 Our team decided to use **React.js** for the frontend and **Firebase** for the backend, with **Google Realtime Database** as our data store. We sought an architecture that would be simple to maintain, efficient to create, and responsive to real time changes.

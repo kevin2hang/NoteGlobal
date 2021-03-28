@@ -172,8 +172,8 @@ class NotePost extends Component {
     render() {
         return (
             <>
-                <Grid container spacing={8}>
-                    <Grid item xs={5}>
+                <Grid container spacing={4}>
+                    <Grid item lg={5} xs={12}>
                         <div style={{ display: "flex" }}>
                             <IconButton onClick={this.handleLeft} disabled={this.state.pageNumber <= 1}>
                                 <ChevronLeftIcon />
@@ -188,10 +188,10 @@ class NotePost extends Component {
                             file={this.props.url}
                             onLoadSuccess={this.onDocumentLoadSuccess}
                         >
-                            <Page pageNumber={this.state.pageNumber} height={650} className="viewer" />
+                            <Page pageNumber={this.state.pageNumber} className="viewer" />
                         </Document>
                     </Grid>
-                    <Grid item xs={7} style={{width:'100%'}}>
+                    <Grid item lg={7} xs={12} style={{width:'100%'}}>
                         <p> {this.props.title} </p>
                         <p> Posted {this.props.posted.toLocaleDateString()} </p>
                         <p> Average Rating: {this.props.rating} </p>

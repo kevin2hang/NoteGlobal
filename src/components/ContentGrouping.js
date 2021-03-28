@@ -4,6 +4,7 @@ import database from '../database';
 import { Link, useRouteMatch, useParams } from "react-router-dom";
 import NotePost from './NotePost';
 import UploadNote from './UploadNote';
+import '../styles/Container.css'
 
 function ContentGrouping(props) {
   const {path, url} = useRouteMatch();
@@ -20,7 +21,7 @@ function ContentGrouping(props) {
         // if (item.val().fileUrl !== 'blank') {
           newList.push
             (
-              <div style={{marginLeft: "100px", width: "80vw"}}>
+              <div className="post-container">
                   <NotePost
                     school={params.school}
                     course={params.course}

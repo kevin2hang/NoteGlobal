@@ -57,10 +57,13 @@ const Course = (props) => {
         }
       })
     });
-    const blankNotePost = {
-      'fileUrl': 'blank',
+    const contentGroupingObj = {
+      'googleId': getGoogleId(),
+      'email': getEmail(),
+      dateDay: new Date().toLocaleDateString(),
+      dateTime: new Date().toLocaleTimeString(),
     };
-    database.ref(dbPath+newContentGrouping+'/').push(blankNotePost);
+    database.ref(dbPath+newContentGrouping+'/').set(contentGroupingObj);
     setNewContentGrouping('');
     setShowAddForm(false);
     updateFolders();

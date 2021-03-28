@@ -134,7 +134,6 @@ class App extends Component {
             {/* <Route path="/user/admin" component={}/> */}
             {/* <Route path="/user/notes" component={}/> */}
             {/* <Route path="/profile" component={Profile}/> */}
-            <div>Signed In!</div>
           </div>
           :
           <div id='main-content'>

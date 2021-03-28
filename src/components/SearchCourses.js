@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import database from '../database';
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import CreateSchool from './CreateSchool';
 import CreateCourse from './CreateCourse';
 
@@ -162,7 +162,9 @@ class SearchCourses extends Component {
                     </div>
                 }
                 {this.state.waitingFor == 'nothing' &&
-                    <Link to={`/${this.state.school}/${this.state.course}`}>Move on to {`/${this.state.school}/${this.state.course}`}</Link>}
+                  <Redirect to={`/${this.state.school}/${this.state.course}`}/>
+                    // <Link to={`/${this.state.school}/${this.state.course}`}>Move on to {`/${this.state.school}/${this.state.course}`}</Link>
+                    }
             </div>
         );
     };

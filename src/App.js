@@ -133,8 +133,10 @@ class App extends Component {
           </div>
           :
           <div id='main-content'>
-            <img className='logo' src={Logo}/>
-            <h1>Note Global</h1>
+            <div className='search-courses'>
+              <img className='logo' src={Logo}/>
+              <h1>Note Global</h1>
+            </div>
             <div id="welcome">Welcome to Note Global</div>
             <div id="signInPrompt">Please sign in to continue!</div>
             <StyledFirebaseAuth

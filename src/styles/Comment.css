@@ -1,5 +1,5 @@
 .comment {
-  width: 80%;
+  width: 95%;
   height: fit-content;
   /* overflow-y: scroll; */
   
@@ -20,12 +20,12 @@
 }
 
 .parent-comment {
-  width: 80%
+  width: 95%
 }
 
 .reply-comment {
-  margin-left: 6%;
-  width: 74%;
+  margin-left: 8%;
+  width: 87%;
 }
 
 .reply-input {

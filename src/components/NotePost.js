@@ -35,7 +35,7 @@ class NotePost extends Component {
             }
         }
         return true;
-    } 
+    }
 
     componentDidMount = () => {
         // TODO: Grab current user's rating and flagged status from DB, and set state vals to them
@@ -47,7 +47,7 @@ class NotePost extends Component {
         })
 
         let googleId = getGoogleId();
-        database.ref(this.dbPath +'/ratings/').on("value", snapshot => {
+        database.ref(this.dbPath + '/ratings/').on("value", snapshot => {
             snapshot.forEach(rating => {
                 if (rating.key == googleId) {
                     this.setState({rating : rating.val()});
@@ -156,7 +156,7 @@ class NotePost extends Component {
     }
 
     toggleShowAddComment = () => {
-        this.setState({showAddComment: !this.state.showAddComment});
+        this.setState({ showAddComment: !this.state.showAddComment });
     }
 
     addComment = () => {
@@ -172,12 +172,12 @@ class NotePost extends Component {
             flagged: false,
             childComments: {}
         };
-        database.ref(this.dbPath+'/comments/').push(newComment);
-        this.setState({showAddComment: false, commentVal: ''});
+        database.ref(this.dbPath + '/comments/').push(newComment);
+        this.setState({ showAddComment: false, commentVal: '' });
     }
 
     handleText = (event) => {
-        this.setState({commentVal: event.target.value});
+        this.setState({ commentVal: event.target.value });
     }
 
     render() {
@@ -202,10 +202,10 @@ class NotePost extends Component {
                             <Page pageNumber={this.state.pageNumber} className="viewer" />
                         </Document>
                     </Grid>
-                    <Grid item lg={7} xs={12} style={{width:'100%'}}>
+                    <Grid item lg={7} xs={12} style={{ width: '100%' }}>
                         <p> {this.props.title} </p>
                         <p> Posted {this.props.posted.toLocaleDateString()} </p>
-                        <p> Average Rating: {this.props.rating} </p>
+                        <p> Average Rating: {this.props.rating.toFixed(2)} </p>
                         <p> Rate This Note </p>
                         <Slider
                             min={0}
@@ -224,23 +224,24 @@ class NotePost extends Component {
                             <p> Flag for Cheating</p>
                         </div>
                         <p> <h6>Comments </h6></p>
-                        {/* TODO: Add Comments */}
-                        {this.state.comments.map((commentObj) =>
-                            <Comment
-                                content={commentObj.val().content}
-                                path={this.dbPath+'/comments/'}
-                                dbKey={commentObj.key}
-                                dateDay={commentObj.val().dateDay}
-                                dateTime={commentObj.val().dateTime}
-                                flagged={commentObj.val().flagged}
-                            />
-                        )}
-                        {this.state.showAddComment ? 
+                        <div className='comments'>
+                            {this.state.comments.map((commentObj) =>
+                                <Comment
+                                    content={commentObj.val().content}
+                                    path={this.dbPath + '/comments/'}
+                                    dbKey={commentObj.key}
+                                    dateDay={commentObj.val().dateDay}
+                                    dateTime={commentObj.val().dateTime}
+                                    flagged={commentObj.val().flagged}
+                                />
+                            )}
+                        </div>
+                        {this.state.showAddComment ?
                             <>
-                            <input className='add-comment-form reply-input' value={this.state.commentVal} onChange={this.handleText}/>
-                            <button className='add-comment-btn btn btn-success' onClick={this.addComment}>Add Comment</button>
+                                <input className='add-comment-form reply-input' value={this.state.commentVal} onChange={this.handleText} />
+                                <button className='add-comment-btn btn btn-success' onClick={this.addComment}>Add Comment</button>
                             </>
-                        : <button className='show-add-comment-btn btn btn-success' onClick={this.toggleShowAddComment}>Add Comment</button>
+                            : <button className='show-add-comment-btn btn btn-success' onClick={this.toggleShowAddComment}>Add Comment</button>
                         }
                     </Grid>
                 </Grid>

@@ -119,12 +119,12 @@ class SearchCourses extends Component {
     render() {
         return (
             <div>
-                <button id="backBtn" onClick={this.moveBack}>Back</button>
+                <button id="backBtn" className="btn btn-secondary" onClick={this.moveBack}>Back</button>
                 {this.state.waitingFor == 'school' &&
                     <div className="dropdownForm">
 
                         <form onSubmit={this.schoolSubmit}>
-                            <label>Choose a school (or create one if your's isn't there): </label>
+                            <label>Choose a school (or create one if yours isn't there): </label>
 
                             {console.log(this.state.school)}
                             <select value={this.state.school} id="schoolSelector" onChange={this.handleSchoolChange} value={this.state.school}>
@@ -132,7 +132,7 @@ class SearchCourses extends Component {
                                     return <option value={school}>{school}</option>
                                 })}
                             </select>
-                            <input type="submit" value="Submit" />
+                            <input className="btn btn-primary" type="submit" value="Submit" />
                         </form>
 
                         <CreateSchool readSchools={this.readSchools} />
@@ -150,7 +150,7 @@ class SearchCourses extends Component {
                                     return <option value={course}>{course}</option>
                                 })}
                             </select>
-                            <input type="submit" value="Submit" />
+                            <input className="btn btn-primary" type="submit" value="Submit" />
                         </form>
 
                         <CreateCourse />

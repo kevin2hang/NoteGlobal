@@ -53,8 +53,8 @@ class CreateSchool extends Component {
             <div>
                 <form onSubmit={this.submit}>
                     Create a School:
-                    <input type="text" placeholder="School Name" value={this.state.school} onChange={this.handleChange} />
-                    <input type="submit" />
+                    <input className="form-control" type="text" placeholder="School Name" value={this.state.school} onChange={this.handleChange} />
+                    <input className="btn btn-primary" type="submit" />
                 </form>
             </div>
         )

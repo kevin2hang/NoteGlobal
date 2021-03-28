@@ -99,13 +99,13 @@ const Course = (props) => {
         });
       })} */}
       { !showAddForm ? 
-        <button class='show-add-content-grouping-form' onClick={toggleShowButton}>Add New Folder</button>
+        <button class='show-add-content-grouping-form btn btn-primary' onClick={toggleShowButton}>Add New Folder</button>
         : ''
       }
       { showAddForm ? 
         <div className='add-content-grouping-form'>
-            <input className='add-content-grouping-input' value={newContentGrouping} onChange={handleChange} />
-            <button className onClick={addContentGrouping}>Add New Folder</button>
+            <input className='add-content-grouping-input form-control' value={newContentGrouping} onChange={handleChange} />
+            <button className='btn btn-primary' onClick={addContentGrouping}>Add New Folder</button>
         </div>
         : ''
       }

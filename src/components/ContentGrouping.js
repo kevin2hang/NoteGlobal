@@ -15,8 +15,8 @@ function ContentGrouping(props) {
   const params = useParams();
 
   const readFromDB = () => {
-    let newList = [];
     database.ref(dbPath).on('value', (snapshot) => {
+      let newList = [];
       snapshot.forEach(item => {
         // if (item.val().fileUrl !== 'blank') {
           newList.push
